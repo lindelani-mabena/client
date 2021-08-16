@@ -1,0 +1,14 @@
+    <h2>Books List:</h2>
+    <div class="card" *ngFor="let book of listBooks; let i = index">
+        <h5 class="card-header">{{book.bookName}}</h5>
+        <div class="card-body">
+          <p class="card-text">Description: {{book.bookDescription}}</p>
+          <p class="card-text">Authors: {{ book.bookAuthors}}</p>
+          <p class="card-text">Publisher: {{ book.bookPublisher }}</p>
+          <p class="card-text">ISBN Number: {{ book.bookISBN }}</p>
+          <p class="card-text">Year Published: {{ book.bookYearPublished }}</p>
+          <a href="#" class="btn btn-secondary">Go somewhere</a>
+        </div>
+      </div>
+      <br />
+    

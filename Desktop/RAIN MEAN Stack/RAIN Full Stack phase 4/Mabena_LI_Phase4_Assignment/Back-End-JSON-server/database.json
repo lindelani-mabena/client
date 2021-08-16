@@ -1,0 +1,147 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Lindelani",
+      "lastName": "Mabena",
+      "email": "lindelaniinnocent9@gmail.com",
+      "phoneNumber": 760372551,
+      "password": "Inno5454*"
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "phoneNumber": 0,
+      "password": ""
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8,
+      "firstName": "",
+      "lastName": "",
+      "email": "admin",
+      "phoneNumber": 0,
+      "password": "admin"
+    },
+    {
+      "id": 9,
+      "firstName": "dndndbdbd",
+      "lastName": "",
+      "email": "",
+      "phoneNumber": 0,
+      "password": ""
+    },
+    {
+      "id": 10,
+      "firstName": "Innocent",
+      "lastName": "Nkosi",
+      "email": "linda.nkosi@gmail.com",
+      "phoneNumber": 712538585,
+      "password": "Mabe"
+    },
+    {
+      "id": 11,
+      "firstName": "Mabena",
+      "lastName": "Mabena",
+      "email": "K",
+      "phoneNumber": 3433,
+      "password": "K",
+      "confirmPassword": "K"
+    },
+    {
+      "id": 12,
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "password": "",
+      "confirmPassword": ""
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Lindelani",
+      "lastName": "Mabena",
+      "email": "lindelaniinnocent9@gmail.com",
+      "phoneNumber": 760372551,
+      "message": "I just wanna say your platform is great"
+    },
+    {
+      "id": 2,
+      "firstName": "Innocent",
+      "lastName": "Mngomezulu",
+      "email": "lindelani.mngomezulu@gmail.com",
+      "phoneNumber": 123456789,
+      "message": ""
+    },
+    {
+      "id": 3,
+      "firstName": "Innocent",
+      "lastName": "Mngomezulu",
+      "email": "lindelani.mngomezulu@gmail.com",
+      "phoneNumber": 123456789,
+      "message": "This platform is very helpful guys, keep up the good work hey."
+    },
+    {
+      "id": 4,
+      "firstName": "Innocent",
+      "lastName": "Mngomezulu",
+      "email": "lindelani.mngomezulu@gmail.com",
+      "phoneNumber": 123456789,
+      "message": "This platform is very helpful guys, keep up the good work hey."
+    },
+    {
+      "id": 5,
+      "firstName": "Innocent",
+      "lastName": "Mngomezulu",
+      "email": "lindelani.mngomezulu@gmail.com",
+      "phoneNumber": 123456789,
+      "message": "This platform is very helpful guys, keep up the good work hey."
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "bookName": "Calculus Early Transcendentals",
+      "bookDescription": "Mathematics 1",
+      "bookAuthors": "James Stewart",
+      "bookPublisher": "Pearson Publishers",
+      "bookISBN": 97848447474747,
+      "bookYearPublished": 1984
+    },
+    {
+      "id": 1,
+      "bookName": "C++ Programming",
+      "bookDescription": "Computer Science 1",
+      "bookAuthors": "J. Stroutrup",
+      "bookPublisher": "Wiley Publishers",
+      "bookISBN": 9784844747483838,
+      "bookYearPublished": 2000
+    },
+    {
+      "bookName": "Holy Bible ",
+      "bookDescription": "Christian bible",
+      "bookAuthors": "John ",
+      "bookPublisher": "University of Johannesburg",
+      "bookISBN": 11254,
+      "bookYearPublished": 1998,
+      "id": 2
+    }
+  ]
+}

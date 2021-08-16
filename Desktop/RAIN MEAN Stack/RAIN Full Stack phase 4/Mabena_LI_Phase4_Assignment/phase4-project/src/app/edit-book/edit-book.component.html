@@ -1,0 +1,40 @@
+<div class="container text-center">
+    <form>
+      <img class="mb-4" src="assets/images/ct.png" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">Update book</h1>
+  
+      <div class="form-floating">
+        <input type="text" class="form-control" id="bookName" [(ngModel)]= "book.bookName" name="bookName" placeholder="Book Title"
+         />
+        <label for="bookName">Book title</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="bookDescription" [(ngModel)]= "book.bookDescription" name="bookDescription" placeholder="Book Description"
+         />
+        <label for="bookDescription">Book description</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="bookAuthors" name="bookAuthors" [(ngModel)]= "book.bookAuthors" placeholder="Authors"
+         />
+        <label for="bookAuthors">Authors</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="bookPublisher" name="bookPublisher" [(ngModel)]= "book.bookPublisher" placeholder="Publisher"
+         />
+        <label for="bookPublisher">Publisher</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="bookISBN" name="bookISBN" [(ngModel)]= "book.bookISBN" placeholder="97858547521369"
+         />
+        <label for="bookISBN">ISBN number</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="bookYearPublished" name="bookYearPublished" [(ngModel)]= "book.bookYearPublished" placeholder="1997"
+         />
+        <label for="password">Year published</label>
+      </div>
+      <br />
+      <a href="#" class="w-100 btn btn-lg btn-secondary"  type="submit" (click)="UpdateBook()">Add book</a>
+    </form>
+  </div>
+

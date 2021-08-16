@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+
+  angular:
+    build: ./phase4-project
+    container_name: angular
+    restart: always
+    expose:
+      - 8080
+
+  nginx:
+    build: ./phase4-project
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
