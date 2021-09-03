@@ -15,6 +15,20 @@ export class AppComponent {
   {
     
   }
+
+  adminLoginStatus()
+  {
+    if(this._authenticationAdmin.isAdminLoggedIn())
+    {
+      if(this._authenticationAdmin.isAdminLoggedIn())
+      {
+        return true;
+      }
+      return false;
+    }
+  }
+
+
   loginStatus()
   {
     if(this._authentication.isLoggedIn())

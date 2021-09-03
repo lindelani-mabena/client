@@ -22,11 +22,9 @@ export class ProductsComponent implements OnInit {
       console.log("list is"+ this.listProducts);
     },(error)=>
     {
-      alert("Error encountered is "+ error);
+      alert("Error encountered is "+ error.description);
     });
   }
-
-  
 
   buyThisProduct(productItem:Product)
   {

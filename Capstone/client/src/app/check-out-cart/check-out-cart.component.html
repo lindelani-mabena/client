@@ -1,1 +1,108 @@
-<p>check-out-cart works!</p>
+<main>
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4"
+            src="assets/images/ct.png"
+            alt="" width="180" height="180">
+        <h2>Checkout Page</h2>
+    <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span>Your cart</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li *ngFor="let product of productItems" class="list-group-item d-flex justify-content-between lh-sm">
+                   
+                    <div>
+        
+                        <h6 class="my-0">{{product.name}}</h6>
+                        <small class="text-muted">{{product.description}}</small>
+                    </div>
+                    <span class="text-muted">R {{product.price}}</span>
+                </li> 
+        
+
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (Rand)</span>
+                    <strong> R. {{totalPrice}}</strong>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Payment Information</h4>
+            <form class="needs-validation" novalidate>
+                <div class="col-12">
+                    <div class="col-12">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Name" value="" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="Surname" class="form-label">Surname</label>
+                        <input type="text" class="form-control" id="Surname" placeholder="Surname" value="" required>
+                       
+                    </div>
+
+                    <div class="col-12">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="Username" placeholder="Username" value="" required>
+
+                    </div>
+                    <div class="col-12">
+                        <label for="emailAddress" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                        <input type="email" class="form-control" id="emailAddress" placeholder="yourname@example.com">
+
+                    <div class="col-12">
+                        <label for="addressLine1" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="addressLine1" placeholder="1 Long St" required>
+    
+                    </div>
+
+                    <div class="col-12">
+                        <label for="addressLine2" class="form-label">Address 2 <span
+                                class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="addressLine2" placeholder="Apartment or suite">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-select" id="country" required>
+                            <option value="">Choose...</option>
+                            <option>South Africa</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="province" class="form-label">Province</label>
+                        <select class="form-select" id="province" required>
+                            <option value="">Choose...</option>
+                            <option>Gauteng</option>
+                            <option>Western Cape</option>
+                            <option>Kwa-Zulu Natal</option>
+                            <option>Eastern Cape</option>
+                            <option>North West</option>
+                            <option>Mpumalanga</option>
+                            <option>Limpopo</option>
+                            <option>Free State</option>
+                            <option>Northern Cape</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="Postal" class="form-label">Postal Code</label>
+                        <input type="text" class="form-control" id="Postal" placeholder="" required>
+                      
+                    </div>
+                </div>
+                <hr class="col-12">       
+        </div>
+        <button  (click)="makePayment()" class="col-12d btn btn-primary btn-lg">Pay</button>
+        </form>
+        </div>
+        </div>
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy;2021 Browse and Pay</p>
+        </footer>
+
+

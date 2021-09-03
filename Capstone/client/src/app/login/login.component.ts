@@ -36,13 +36,15 @@ export class LoginComponent implements OnInit {
       {
         alert("Successfull login");
 
-        if(this.loginModel.type=="admin")
+        if((this.userLogin.username=="admin"))
         {
           localStorage.setItem('isAdminLoggedIn',"true")
+        
           this._Router.navigate(['/admin-page']);
         }
         else{
           localStorage.setItem('isLoggedIn',"true")
+          localStorage.setItem('email', this.userLogin.username);
           this._Router.navigate(['/products']);
         }        
       }

@@ -21,6 +21,8 @@ import { CheckOutCartComponent } from './check-out-cart/check-out-cart.component
 import { AdminComponentComponent } from './admin-component/admin-component.component';
 import { AdminAddProductComponent } from './admin-add-product/admin-add-product.component';
 import { AdminUpdateProductComponent } from './admin-update-product/admin-update-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AdminUpdateProductComponent } from './admin-update-product/admin-update
     CheckOutCartComponent,
     AdminComponentComponent,
     AdminAddProductComponent,
-    AdminUpdateProductComponent
+    AdminUpdateProductComponent,
+    CheckoutComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,

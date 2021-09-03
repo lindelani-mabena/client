@@ -9,9 +9,9 @@
         <label for="firstName">First Name</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="lastName" placeholder="Username"
+        <input type="text" class="form-control" id="txtUsername" [(ngModel)]="user.username" name="txtUsername" placeholder="Username"
          />
-        <label for="username">Username</label>
+        <label for="txtUsername">Username</label>
       </div>
       <div class="form-floating">
         <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" placeholder="name@example.com"
@@ -33,11 +33,7 @@
         <label for="confirmPassword">Confirm Password</label>
       </div>
       <div>
-        <br/>
-      <a class="w-100 btn btn-lg btn-succcess" (click)="register()">Sign up</a>
-      <a class="w-100 btn btn-lg btn-danger"  type="reset" >Sign up</a>
+      <a class="w-100 btn btn-lg btn-secondary" (click)="register()">Sign up</a>
       </div>
-
-      
     </form>
   </div>

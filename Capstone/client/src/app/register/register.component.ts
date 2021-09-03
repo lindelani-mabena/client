@@ -10,6 +10,7 @@ import { User } from '../models/user';
 })
 export class RegisterComponent implements OnInit {
   user: User = new User();
+   image:string = "assets/images/ct.png";
 
   constructor(private _HttpConnetionService:HttpConnectionService, private _Router:Router) { }
 

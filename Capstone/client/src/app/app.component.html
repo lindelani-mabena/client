@@ -3,32 +3,25 @@
       <ul class="nav me-auto">
           <li class="nav-item"><a routerLink="home" class="btn nav-link link-dark px-2 active"
                   aria-current="page">Home</a></li>
-          <li class="nav-item"><a routerLink="about" class="btn nav-link link-dark px-2">About</a></li>
-          <li class="nav-item"><a routerLink="products" class="btn nav-link link-dark px-2">View products</a></li>
-          <li class="nav-item"><a routerLink="cart" class="btn nav-link link-dark px-2">Cart</a></li>
-          <li class="nav-item"><a routerLink="contact" class="btn nav-link link-dark px-2">Contact</a></li>
-          <li class="nav-item"><a routerLink="admin-page" class="btn nav-link link-dark px-2">Admin Dashboard</a></li> <!-- *ngIf="adminLoggedIn" -->
-          <!--<li class="nav-item"><a routerLink="update-book" *ngIf="adminLoggedIn"
-                  class="btn nav-link link-dark px-2">Update book</a></li> -->
+          <li *ngIf="adminLoginStatus()" class="nav-item"><a routerLink="about" class="btn nav-link link-dark px-2">About</a></li>
+          <li *ngIf="!adminLoginStatus()" class="nav-item"><a routerLink="products" class="btn nav-link link-dark px-2">View products</a></li>
+          <li *ngIf="!adminLoginStatus()" class="nav-item"><a routerLink="cart" class="btn nav-link link-dark px-2">Cart</a></li>
+          <li *ngIf="!adminLoginStatus()" class="nav-item"><a routerLink="contact" class="btn nav-link link-dark px-2">Contact</a></li>
+          <li *ngIf="adminLoginStatus()" class="nav-item"><a routerLink="admin-page" class="btn nav-link link-dark px-2">Admin Dashboard</a></li> <!-- *ngIf="adminLoggedIn" -->
+         
       </ul>
 
       <ul class="nav">
-          <!--  <li class="nav-item" *ngIf="loggedIn!=true"><a routerLink="login" class="btn nav-link link-dark px-2"
-          (click)="btnLoginLink()">Login</a></li>
-      <li class="nav-item" *ngIf="loggedIn!=true"><a routerLink="sign-up" class="btn nav-link link-dark px-2"
-          (click)="btnSignUpLink()">Sign up</a></li>
-      <li class="nav-item" *ngIf="loggedIn==true"><a routerLink="login" class="btn nav-link link-dark px-2"
-          (click)="btnLogoutLink()">Logout</a></li> -->
-          <li class="nav-item"><a routerLink="login" class="btn nav-link link-dark px-2">Login</a>
+          <li class="nav-item" *ngIf=" !adminLoginStatus() || !loginStatus()"><a routerLink="login" class="btn nav-link link-dark px-2">Login</a>
               <!--*ngIf="!loggedIn"-->
           </li>
           <li class="nav-item"><a routerLink="register" class="btn nav-link link-dark px-2">Register</a></li>
           <!--*ngIf="!loggedIn"-->
-          <li class="nav-item"><a routerLink="update-profile" class="btn nav-link link-dark px-2">Update profile</a>
+          <li class="nav-item" *ngIf="adminLoginStatus()|| loginStatus()"><a routerLink="update-profile" class="btn nav-link link-dark px-2">Update profile</a>
           </li>
           <!--*ngIf="!loggedIn"-->
-          <li class="nav-item"><a (click)="logout()" class="btn nav-link link-dark px-2">Logout</a></li>
-          <!--*ngIf="loggedIn"-->
+          <li class="nav-item" *ngIf="adminLoginStatus()|| loginStatus()"><a (click)="logout()" class="btn nav-link link-dark px-2">Logout</a></li>
+          
       </ul>
   </div>
 </nav>
@@ -80,24 +73,7 @@
               </ul>
           </div>
 
-          <div class="col-6 col-lg-3 mb-6">
-              <h5>Communities</h5>
-              <ul class="list-unstyled">
-                  <li class="mb-2"><a href="https://stackoverflow.com/">Software Development</a></li>
-                  <li class="mb-2"><a
-                          href="https://www.dni.gov/index.php/features/2763-principles-of-artificial-intelligence-ethics-for-the-intelligence-community/">Artificial
-                          Intelligence</a></li>
-                  <li class="mb-2"><a href="https://community.ibm.com/community/user/datascience/home">Data
-                          Science</a></li>
-                  <li class="mb-2"><a
-                          href="http://www.scielo.org.za/scielo.php?script=sci_arttext&pid=S1560-683X2019000100034">Cloud
-                          Computing
-                      </a></li>
-                  <li class="mb-2"><a
-                          href="https://www.cybersecurityintelligence.com/national-cybersecurity-hub-south-africa-4637.html">Cyber
-                          Security</a></li>
-              </ul>
-          </div>
+         
       </div>
   </div>
 </footer>

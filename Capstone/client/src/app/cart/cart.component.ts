@@ -41,4 +41,9 @@ export class CartComponent implements OnInit {
       localStorage.setItem('savedItems', JSON.stringify(this.productItems));
   }
 
+  checkOutCart()
+  {
+    return this.productItems;
+  }
+
 }

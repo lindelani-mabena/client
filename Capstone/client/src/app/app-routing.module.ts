@@ -8,6 +8,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckOutCartComponent } from './check-out-cart/check-out-cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 import { LoginComponent } from './login/login.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductMoreInfoComponent } from './product-more-info/product-more-info.component';
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path:'checkout', component:CheckOutCartComponent},
   {path:'add-product', component:AdminAddProductComponent},
   {path:'admin-page',component:AdminComponentComponent},
-  {path:'update-product',component:AdminUpdateProductComponent}
+  {path:'update-product',component:AdminUpdateProductComponent},
+  {path:'invoice', component:InvoiceComponent}
 ];
 
 
