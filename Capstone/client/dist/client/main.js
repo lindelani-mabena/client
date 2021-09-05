@@ -896,29 +896,29 @@ class HttpConnectionService {
         return this._HttpClient.put(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users/${id}`, user);
     }
     addNewContactInfo(contact) {
-        return this._HttpClient.post('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/contacts', contact);
+        return this._HttpClient.post('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/contacts', contact);
     }
     getProducts() {
-        return this._HttpClient.get('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products');
+        return this._HttpClient.get('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products');
     }
     getProductsByCategory(strCategory) {
-        return this._HttpClient.get('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products/' + { strCategory });
+        return this._HttpClient.get('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products/' + { strCategory });
     }
     addProduct(productObj) {
-        return this._HttpClient.post('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products', productObj);
+        return this._HttpClient.post('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products', productObj);
     }
     getProductById(id) {
-        return this._HttpClient.get(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products/${id}`);
+        return this._HttpClient.get(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com//api/products/${id}`);
     }
     addToDatabase(productItem) {
-        return this._HttpClient.get('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products');
+        return this._HttpClient.get('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products');
     }
     addToCart(productItem) {
         this.cartItems.push(productItem);
         console.log("added new item to cart");
     }
     DeleteProduct(id) {
-        return this._HttpClient.delete(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products/${id}`);
+        return this._HttpClient.delete(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products/${id}`);
     }
 }
 HttpConnectionService.ɵfac = function HttpConnectionService_Factory(t) { return new (t || HttpConnectionService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };

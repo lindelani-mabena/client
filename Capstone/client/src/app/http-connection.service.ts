@@ -18,20 +18,20 @@ export class HttpConnectionService {
   constructor(private _HttpClient: HttpClient) {
   }
   RegisterUser(user: User): Observable<User> {
-    return this._HttpClient.post<User>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users', user);
+    return this._HttpClient.post<User>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users', user);
   }
   getAllUsers(): Observable<Array<User>> {
-    return this._HttpClient.get<Array<User>>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users');
+    return this._HttpClient.get<Array<User>>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users');
   }
 
    Login(userLogin:UserLogin):Observable<LoginModelReturn>
   { 
-    return this._HttpClient.post<LoginModelReturn>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users/login',userLogin);
+    return this._HttpClient.post<LoginModelReturn>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users/login',userLogin);
   }      
 
   updateProfile(id:any,user: User):Observable<User>
   {
-    return this._HttpClient.put<User>(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users/${id}`,user);
+    return this._HttpClient.put<User>(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users/${id}`,user);
   }
 
   addNewContactInfo(contact: Contact): Observable<Contact> {
