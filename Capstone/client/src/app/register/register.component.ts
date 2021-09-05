@@ -37,6 +37,6 @@ export class RegisterComponent implements OnInit {
   {
     alert("Password is not equal to confirm password, please try again.");
   }
-
+  
   }
 }

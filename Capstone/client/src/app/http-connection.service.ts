@@ -65,4 +65,9 @@ export class HttpConnectionService {
   {
     return this._HttpClient.delete<Product>(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products/${id}`);
   }
+
+  updateProduct(id:any, productObj:Product):Observable<Product>
+  {
+    return this._HttpClient.put<Product>(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products/${id}`, productObj);
+  }
 }

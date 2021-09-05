@@ -28,7 +28,7 @@
             <td>{{ product.description }}</td>
             <td>{{ product.category }}</td>
             <td>
-                <a [routerLink]="['/add-product', product._id]" class="btn btn-primary">Update Product</a>|
+                <a [routerLink]="['/update-product', product._id]" class="btn btn-primary">Update Product</a>|
                 <a (click)="DeleteProduct(product._id)"  class="btn btn-danger">Delete Product</a>
             </td>
         </tr>

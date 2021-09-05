@@ -16,18 +16,19 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._HttpConnectionService.updateProfile(this.id,this.user).subscribe((result)=>
-    {
-
-    },(error)=>
-    {
-
-    })
+    this.id= localStorage.getItem("userID");
+    
   }
 
   updateProfile()
   {
+    this._HttpConnectionService.updateProfile(this.id,this.user).subscribe((result)=>
+    {
+        alert("Updated User Profile")
+    },(error)=>
+    {
 
+    })
   }
 
 }

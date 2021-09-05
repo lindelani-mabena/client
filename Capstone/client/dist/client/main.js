@@ -884,16 +884,16 @@ class HttpConnectionService {
         this.cartItems = [];
     }
     RegisterUser(user) {
-        return this._HttpClient.post('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users', user);
+        return this._HttpClient.post('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users', user);
     }
     getAllUsers() {
-        return this._HttpClient.get('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users');
+        return this._HttpClient.get('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users');
     }
     Login(userLogin) {
-        return this._HttpClient.post('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users/login', userLogin);
+        return this._HttpClient.post('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users/login', userLogin);
     }
     updateProfile(id, user) {
-        return this._HttpClient.put(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/users/${id}`, user);
+        return this._HttpClient.put(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/users/${id}`, user);
     }
     addNewContactInfo(contact) {
         return this._HttpClient.post('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/contacts', contact);

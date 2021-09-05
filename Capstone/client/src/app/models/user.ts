@@ -6,6 +6,7 @@ export class User {
     password: string = "";
     confirmPassword: string = "";
     type: string = "general-user";
+
     constructor() {
     }
     

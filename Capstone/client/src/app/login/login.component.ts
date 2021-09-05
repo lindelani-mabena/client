@@ -1,7 +1,5 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { error } from 'protractor';
 import { HttpConnectionService } from '../http-connection.service';
 import { LoginModelReturn } from '../models/login-model-return';
 import { User } from '../models/user';
@@ -45,6 +43,7 @@ export class LoginComponent implements OnInit {
         else{
           localStorage.setItem('isLoggedIn',"true")
           localStorage.setItem('email', this.userLogin.username);
+          localStorage.setItem('userID',  this.userLogin._id);
           this._Router.navigate(['/products']);
         }        
       }
@@ -54,8 +53,7 @@ export class LoginComponent implements OnInit {
     },(error)=>
     {
 
-    })
-  }
-  
+    });
+  }  
 }
 

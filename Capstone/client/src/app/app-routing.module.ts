@@ -16,7 +16,6 @@ import { ProductsComponent } from './products/products.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthenticationGuardAdminService } from './services/authentication-guard-admin.service';
 import { AuthenticationGuardService } from './services/authentication-guard.service';
-import { UpdateProfileService } from './update-profile.service';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 const routes: Routes = [
