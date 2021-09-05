@@ -15,9 +15,6 @@ export class HttpConnectionService {
   private Users: Array<User> = [];
 
   cartItems:Array<Product>=[];
-
-
-
   constructor(private _HttpClient: HttpClient) {
   }
   RegisterUser(user: User): Observable<User> {
@@ -38,25 +35,25 @@ export class HttpConnectionService {
   }
 
   addNewContactInfo(contact: Contact): Observable<Contact> {
-    return this._HttpClient.post<Contact>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/contacts', contact)
+    return this._HttpClient.post<Contact>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/contacts', contact)
   }
   getProducts(): Observable<Product[]> {
-    return this._HttpClient.get<Product[]>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products');
+    return this._HttpClient.get<Product[]>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products');
   }
   getProductsByCategory(strCategory: string): Observable<Product[]> {
-    return this._HttpClient.get<Product[]>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products/' + { strCategory });
+    return this._HttpClient.get<Product[]>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products/' + { strCategory });
   }
   addProduct(productObj: Product): Observable<Product> {
-    return this._HttpClient.post<Product>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products', productObj);
+    return this._HttpClient.post<Product>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products', productObj);
   }
 
   getProductById(id:string):Observable<Product>
   {
-    return this._HttpClient.get<Product>(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products/${id}`);
+    return this._HttpClient.get<Product>(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com//api/products/${id}`);
   }
   addToDatabase(productItem:Product):Observable<Product[]>
   {
-    return this._HttpClient.get<Product[]>('http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products');
+    return this._HttpClient.get<Product[]>('http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products');
   }
   addToCart(productItem)
   {
@@ -66,6 +63,6 @@ export class HttpConnectionService {
 
   DeleteProduct(id:any):Observable<Product>
   {
-    return this._HttpClient.delete<Product>(`http://ec2-18-218-173-161.us-east-2.compute.amazonaws.com/api/products/${id}`);
+    return this._HttpClient.delete<Product>(`http://ec2-18-222-3-84.us-east-2.compute.amazonaws.com/api/products/${id}`);
   }
 }
