@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="pingback" href="https://cablevey.com/xmlrpc.php" />
+
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+
+	<script>var et_site_url='https://cablevey.com';var et_post_id='12248';function et_core_page_resource_fallback(a,b){"undefined"===typeof b&&(b=a.sheet.cssRules&&0===a.sheet.cssRules.length);b&&(a.onerror=null,a.onload=null,a.href?a.href=et_site_url+"/?et_core_page_resource="+a.id+et_post_id:a.src&&(a.src=et_site_url+"/?et_core_page_resource="+a.id+et_post_id))}
+</script><script id="diviarea-loader">window.DiviPopupData=window.DiviAreaConfig={"zIndex":1000000,"animateSpeed":400,"triggerClassPrefix":"show-popup-","idAttrib":"data-popup","modalIndicatorClass":"is-modal","blockingIndicatorClass":"is-blocking","defaultShowCloseButton":true,"withCloseClass":"with-close","noCloseClass":"no-close","triggerCloseClass":"close","singletonClass":"single","darkModeClass":"dark","noShadowClass":"no-shadow","altCloseClass":"close-alt","popupSelector":".et_pb_section.popup","initializeOnEvent":"et_pb_after_init_modules","popupWrapperClass":"area-outer-wrap","fullHeightClass":"full-height","openPopupClass":"da-overlay-visible","overlayClass":"da-overlay","exitIndicatorClass":"on-exit","hoverTriggerClass":"on-hover","clickTriggerClass":"on-click","onExitDelay":2000,"notMobileClass":"not-mobile","notTabletClass":"not-tablet","notDesktopClass":"not-desktop","baseContext":"body","activePopupClass":"is-open","closeButtonClass":"da-close","withLoaderClass":"with-loader","debug":false,"ajaxUrl":"https:\/\/cablevey.com\/wp-admin\/admin-ajax.php","sys":[]};var divimode_loader=function(){"use strict";!function(t){t.DiviArea=t.DiviPopup={loaded:!1};var n=t.DiviArea,i=n.Hooks={},o={};function r(t,n,i){var r,e,c;if("string"==typeof t)if(o[t]){if(n)if((r=o[t])&&i)for(c=r.length;c--;)(e=r[c]).callback===n&&e.context===i&&(r[c]=!1);else for(c=r.length;c--;)r[c].callback===n&&(r[c]=!1)}else o[t]=[]}function e(t,n,i,r){if("string"==typeof t){var e={callback:n,priority:i,context:r},c=o[t];c?(c.push(e),c=function(t){var n,i,o,r,e=t.length;for(r=1;r<e;r++)for(n=t[r],i=r;i>0;i--)(o=t[i-1]).priority>n.priority&&(t[i]=o,t[i-1]=n);return t}(c)):c=[e],o[t]=c}}function c(t,n,i){"string"==typeof n&&(n=[n]);var r,e,c=[];for(r=0;r<n.length;r++)Array.prototype.push.apply(c,o[n[r]]);for(e=0;e<c.length;e++){var a=void 0;c[e]&&"function"==typeof c[e].callback&&("filter"===t?void 0!==(a=c[e].callback.apply(c[e].context,i))&&(i[0]=a):c[e].callback.apply(c[e].context,i))}if("filter"===t)return i[0]}i.silent=function(){return i},n.removeFilter=i.removeFilter=function(t,n){r(t,n)},n.removeAction=i.removeAction=function(t,n){r(t,n)},n.applyFilters=i.applyFilters=function(t){for(var n=[],i=arguments.length-1;i-- >0;)n[i]=arguments[i+1];return c("filter",t,n)},n.doAction=i.doAction=function(t){for(var n=[],i=arguments.length-1;i-- >0;)n[i]=arguments[i+1];c("action",t,n)},n.addFilter=i.addFilter=function(n,i,o,r){e(n,i,parseInt(o||10,10),r||t)},n.addAction=i.addAction=function(n,i,o,r){e(n,i,parseInt(o||10,10),r||t)},n.addActionOnce=i.addActionOnce=function(n,i,o,c){e(n,i,parseInt(o||10,10),c||t),e(n,(function(){r(n,i)}),1+parseInt(o||10,10),c||t)}}(window);return{}}();
+</script><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v17.0 (Yoast SEO v17.1) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Technologies and Equipment Involved in Breakfast Cereal Production and Processing - Cablevey® Conveyors</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open%20Sans%3A300italic%2C400italic%2C600italic%2C700italic%2C800italic%2C400%2C300%2C600%2C700%2C800%7CAbel%3Aregular&#038;subset=latin%2Clatin-ext,latin&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open%20Sans%3A300italic%2C400italic%2C600italic%2C700italic%2C800italic%2C400%2C300%2C600%2C700%2C800%7CAbel%3Aregular&#038;subset=latin%2Clatin-ext,latin&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open%20Sans%3A300italic%2C400italic%2C600italic%2C700italic%2C800italic%2C400%2C300%2C600%2C700%2C800%7CAbel%3Aregular&#038;subset=latin%2Clatin-ext,latin&#038;display=swap" /></noscript><link rel="stylesheet" href="https://cablevey.com/wp-content/cache/min/1/ef870646d3cb83b143c04cf4323146e5.css" media="all" data-minify="1" /><style id="wpr-usedcss">.wp-block-gallery{display:flex;flex-wrap:wrap;list-style-type:none;padding:0;margin:0}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip:auto!important;-webkit-clip-path:none;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}body{position:inherit!important}@-moz-keyframes Ani{0%{box-shadow:0 0 0 rgba(255,255,255,0);border:1px solid rgba(255,255,255,0);-webkit-transform:scale(0);transform:scale(0)}70%{box-shadow:0 0 50px #fff;border:1px solid #fff;-webkit-transform:scale(1);transform:scale(1)}100%{box-shadow:0 0 60px rgba(255,255,255,0);border:0 solid rgba(255,255,255,0);-webkit-transform:scale(1.5);transform:scale(1.5)}}@-webkit-keyframes Ani{0%{box-shadow:0 0 0 rgba(255,255,255,0);border:1px solid rgba(255,255,255,0);-webkit-transform:scale(0);transform:scale(0)}70%{box-shadow:0 0 50px #fff;border:1px solid #fff;-webkit-transform:scale(1);transform:scale(1)}100%{box-shadow:0 0 60px rgba(255,255,255,0);border:0 solid rgba(255,255,255,0);-webkit-transform:scale(1.5);transform:scale(1.5)}}@keyframes Ani{0%{box-shadow:0 0 0 rgba(255,255,255,0);border:1px solid rgba(255,255,255,0);-webkit-transform:scale(0);transform:scale(0)}70%{box-shadow:0 0 50px #fff;border:1px solid #fff;-webkit-transform:scale(1);transform:scale(1)}100%{box-shadow:0 0 60px rgba(255,255,255,0);border:0 solid rgba(255,255,255,0);-webkit-transform:scale(1.5);transform:scale(1.5)}}.wpml-ls-sidebars-sidebar-4{background-color:#fff}.wpml-ls-sidebars-sidebar-4,.wpml-ls-sidebars-sidebar-4 .wpml-ls-sub-menu,.wpml-ls-sidebars-sidebar-4 a{border-color:#cdcdcd}.wpml-ls-sidebars-sidebar-4 a{color:#444;background-color:#fff}.wpml-ls-sidebars-sidebar-4 a:hover,.wpml-ls-sidebars-sidebar-4 a:focus{color:#000;background-color:#eee}.wpml-ls-sidebars-sidebar-4 .wpml-ls-current-language>a{color:#444;background-color:#fff}.wpml-ls-sidebars-sidebar-4 .wpml-ls-current-language:hover>a,.wpml-ls-sidebars-sidebar-4 .wpml-ls-current-language>a:focus{color:#000;background-color:#eee}[class*=et_pb_section_dap_]{width:100%}a,body,div,em,form,h1,h2,h4,html,iframe,img,label,li,p,span,strong,sup,ul{margin:0;padding:0;border:0;outline:0;font-size:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;vertical-align:baseline;background:transparent}body{line-height:1}ul{list-style:none}:focus{outline:0}article,footer,header,nav{display:block}body{font-family:Open Sans,Arial,sans-serif;font-size:14px;color:#666;background-color:#fff;line-height:1.7em;font-weight:500;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body.et_cover_background{background-size:cover!important;background-position:top!important;background-repeat:no-repeat!important;background-attachment:fixed}a{color:#2ea3f2}a,a:hover{text-decoration:none}p{padding-bottom:1em}p:not(.has-background):last-of-type{padding-bottom:0}strong{font-weight:700}em{font-style:italic}sup{height:0;line-height:1;position:relative;vertical-align:baseline}sup{bottom:.8em}iframe{max-width:100%}h1,h2,h4{color:#333;padding-bottom:10px;line-height:1em;font-weight:500}h1 a,h2 a,h4 a{color:inherit}h1{font-size:30px}h2{font-size:26px}h4{font-size:18px}input{-webkit-appearance:none}input[type=checkbox]{-webkit-appearance:checkbox}input[type=radio]{-webkit-appearance:radio}input.title,input[type=email],input[type=password],input[type=tel],input[type=text]{background-color:#fff;border:1px solid #bbb;padding:2px;color:#4e4e4e}input.title:focus,input[type=text]:focus{border-color:#2d3940;color:#3e3e3e}input.title,input[type=text]{margin:0}input{font-family:inherit}img{max-width:100%;height:auto}#et-secondary-menu li,#top-menu li{word-wrap:break-word}.footer-widget h4,.mobile_menu_bar:after,.mobile_menu_bar:before{color:#2ea3f2}.et-search-form,.footer-widget li:before,.nav li ul{border-color:#2ea3f2}#et-secondary-nav li ul,#top-header{background-color:#2ea3f2}#main-content{background-color:#fff}#main-header{-webkit-transition:background-color .4s,color .4s,transform .4s,opacity .4s ease-in-out;-webkit-transition:background-color .4s,color .4s,opacity .4s ease-in-out,-webkit-transform .4s;transition:background-color .4s,color .4s,opacity .4s ease-in-out,-webkit-transform .4s;transition:background-color .4s,color .4s,transform .4s,opacity .4s ease-in-out;transition:background-color .4s,color .4s,transform .4s,opacity .4s ease-in-out,-webkit-transform .4s}.container{width:80%;max-width:1080px;margin:auto}body:not(.et-tb) #main-content .container,body:not(.et-tb-has-header) #main-content .container{padding-top:58px}#left-area ul,.entry-content ul{list-style-type:disc;padding:0 0 23px 1em;line-height:26px}#left-area ul li ul{padding:2px 0 2px 20px}#left-area ul.wp-block-gallery{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;list-style-type:none;padding:0}body.et_fixed_nav.et_secondary_nav_enabled #main-header{top:30px}.container{text-align:left;position:relative}#top-header{font-size:12px;line-height:13px;z-index:100000;color:#fff}#top-header a{color:#fff}#et-secondary-nav,#top-header{-webkit-transition:background-color .4s,transform .4s,opacity .4s ease-in-out;-webkit-transition:background-color .4s,opacity .4s ease-in-out,-webkit-transform .4s;transition:background-color .4s,opacity .4s ease-in-out,-webkit-transform .4s;transition:background-color .4s,transform .4s,opacity .4s ease-in-out;transition:background-color .4s,transform .4s,opacity .4s ease-in-out,-webkit-transform .4s}#top-header .container{padding-top:.75em;font-weight:600}#main-header{line-height:23px;font-weight:500;top:0;background-color:#fff;width:100%;box-shadow:0 1px 0 rgba(0,0,0,.1);-moz-box-shadow:0 1px 0 rgba(0,0,0,.1);-webkit-box-shadow:0 1px 0 rgba(0,0,0,.1);position:relative;z-index:99999}#top-header,#top-header #et-info,#top-header .container{line-height:1em}.et_fixed_nav.et_show_nav #page-container{padding-top:80px}.et_fixed_nav.et_show_nav.et_secondary_nav_enabled #page-container{padding-top:111px}.et_fixed_nav #top-header{top:0;left:0;right:0}.et_fixed_nav #main-header,.et_fixed_nav #top-header{position:fixed}.et_header_style_left #et-top-navigation{padding-top:33px}.et_header_style_left #et-top-navigation nav>ul>li>a{padding-bottom:33px}.et_header_style_left .logo_container{position:absolute;height:100%;width:100%}.et_header_style_left #et-top-navigation .mobile_menu_bar{padding-bottom:24px}#logo{width:auto;-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out;margin-bottom:0;max-height:54%;display:inline-block;float:none;vertical-align:middle;-webkit-transform:translateZ(0)}.logo_container{-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out}span.logo_helper{display:inline-block;height:100%;vertical-align:middle;width:0}#et-info{float:left}#et-info-email,#et-info-phone{position:relative}#et-info-phone:before{content:"\e090";position:relative;top:2px;margin-right:2px}#et-info-phone{margin-right:13px}#et-info-email:before{content:"\e076";margin-right:4px}#top-header .et-social-icons{float:none;display:inline-block}#et-secondary-menu .et-social-icons{margin-right:20px}#top-header .et-social-icons li{margin-left:12px;margin-top:-2px}.et-social-icons{float:right}.et-social-icons li{display:inline-block;margin-left:20px}#top-menu,#top-menu-nav{line-height:0}#et-top-navigation{font-weight:600}.et_fixed_nav #et-top-navigation{-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out}#et-secondary-menu{float:right}#et-info,#et-secondary-menu>ul>li a{padding-bottom:.75em;display:block}#et-secondary-nav,#et-secondary-nav li{display:inline-block}#et-secondary-nav a{-webkit-transition:background-color .4s,color .4s ease-in-out;transition:background-color .4s,color .4s ease-in-out}#et-secondary-nav li{margin-right:15px}#et-secondary-nav>li:last-child{margin-right:0}#top-menu,nav#top-menu-nav{float:left}#top-menu li{display:inline-block;font-size:14px;padding-right:22px}#top-menu>li:last-child{padding-right:0}#top-menu a{color:rgba(0,0,0,.6);text-decoration:none;display:block;position:relative;-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out}#et-info-email:hover,#et-secondary-menu>ul>li>a:hover,#top-menu-nav>ul>li>a:hover,.et-social-icons a:hover{opacity:.7;-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out}.et-search-form{top:0;bottom:0;right:0;position:absolute;z-index:1000;width:100%}.et-search-form input{width:90%;border:none;color:#333;position:absolute;top:0;bottom:0;right:30px;margin:auto;background:transparent}.et-search-form .et-search-field::-ms-clear{width:0;height:0;display:none}.et_search_form_container{animation:none;-o-animation:none;-webkit-animation:none;-moz-animation:none}.container.et_search_form_container{position:relative;opacity:0;height:1px}span.et_close_search_field{display:block;width:30px;height:30px;z-index:99999;position:absolute;right:0;cursor:pointer;top:0;bottom:0;margin:auto}span.et_close_search_field:after{font-family:ETmodules;content:"M";speak:none;font-weight:400;-webkit-font-feature-settings:normal;font-feature-settings:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;font-size:32px;display:inline-block;-webkit-box-sizing:border-box;box-sizing:border-box}.container.et_menu_container{z-index:99}.et_search_outer{width:100%;overflow:hidden;position:absolute;top:0}form.et-search-form{background:transparent!important}input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}#left-area .post-meta{font-size:14px;padding-bottom:15px}#left-area .post-meta a{text-decoration:none;color:#666}.single .post{padding-bottom:25px}.single .et_pb_post{margin-bottom:27px}#et-top-navigation{float:right}#top-menu li li{padding:0 20px;margin:0}#top-menu li li a{padding:6px 20px;width:200px}#et-secondary-nav li{position:relative;text-align:right}#et-secondary-nav li ul{position:absolute;right:0;padding:1em 0}#et-secondary-nav li ul ul{right:220px;top:0;margin-top:-1em}#et-secondary-nav li ul li{display:block}#et-secondary-nav li ul{z-index:999999;visibility:hidden;opacity:0;box-shadow:0 2px 5px rgba(0,0,0,.1);-moz-box-shadow:0 2px 5px rgba(0,0,0,.1);-webkit-box-shadow:0 2px 5px rgba(0,0,0,.1);-webkit-transform:translateZ(0)}#et-secondary-nav li>ul{width:220px}#et-secondary-nav li:hover>ul{opacity:1;visibility:visible}#et-secondary-nav li li{padding:0 2em;margin:0}#et-secondary-nav li li a{padding:1em;width:100%;font-size:12px;line-height:1em;margin-right:0;display:block;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}#et-secondary-nav ul li a:hover{background-color:rgba(0,0,0,.03)}#et-secondary-nav li:hover{visibility:inherit}#et-secondary-nav .menu-item-has-children>a:first-child:after,#top-menu .menu-item-has-children>a:first-child:after{font-family:ETmodules;content:"3";font-size:16px;position:absolute;right:0;top:0;font-weight:800}#et-secondary-nav .menu-item-has-children>a:first-child,#top-menu .menu-item-has-children>a:first-child{padding-right:20px}#top-menu li .menu-item-has-children>a:first-child{padding-right:40px}#top-menu li .menu-item-has-children>a:first-child:after{right:20px;top:6px}#et-secondary-nav .menu-item-has-children>a:first-child:after{top:0}#et-secondary-nav li .menu-item-has-children>a:first-child:after{top:.67em;right:auto;left:2.3em}#et_mobile_nav_menu{float:right;display:none}.mobile_menu_bar:before{content:"a";font-size:32px;left:0;position:relative;top:0;cursor:pointer}#main-footer{background-color:#222}#footer-widgets{padding:6% 0 0}.footer-widget{float:left;color:#fff}.footer-widget .fwidget:last-child{margin-bottom:0!important}#footer-widgets .footer-widget li{padding-left:14px;position:relative}#footer-widgets .footer-widget li:before{border-radius:3px;border-style:solid;border-width:3px;content:"";left:0;position:absolute;top:9px}#footer-widgets .footer-widget li a{color:#fff;text-decoration:none}#footer-widgets .footer-widget li a:hover{color:hsla(0,0%,100%,.7)}#footer-bottom{background-color:#1f1f1f;background-color:rgba(0,0,0,.32);padding:15px 0 5px}#footer-bottom a{-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out}#footer-info{text-align:left;color:#666;padding-bottom:10px;float:left}#footer-info a{font-weight:700;color:#666}#footer-info a:hover{opacity:.7}#sidebar{padding-bottom:28px}#sidebar .et_pb_widget{margin-bottom:30px;width:100%;float:none}.widget_search .screen-reader-text{display:none}.et_pb_scroll_top.et-pb-icon{text-align:center;background:rgba(0,0,0,.4);text-decoration:none;position:fixed;z-index:99999;bottom:125px;right:0;-webkit-border-top-left-radius:5px;-webkit-border-bottom-left-radius:5px;-moz-border-radius-topleft:5px;-moz-border-radius-bottomleft:5px;border-top-left-radius:5px;border-bottom-left-radius:5px;display:none;cursor:pointer;font-size:30px;padding:5px;color:#fff}.et_pb_scroll_top:before{content:"2"}@media (min-width:981px){.et_fullwidth_nav .et-search-form,.et_fullwidth_nav .et_close_search_field{right:30px}.et_primary_nav_dropdown_animation_fade #et-top-navigation ul li:hover>ul{-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.et_secondary_nav_dropdown_animation_expand #et-secondary-nav li:hover>ul{-webkit-transform-origin:0 0;transform-origin:0 0;-webkit-animation:Grow .4s ease-in-out;animation:Grow .4s ease-in-out;-webkit-backface-visibility:visible!important;backface-visibility:visible!important}.et_fullwidth_nav #main-header .container{width:100%;max-width:100%;padding-right:30px;padding-left:30px}.et_fullwidth_secondary_nav #top-header .container{width:100%;max-width:100%;padding-right:30px;padding-left:30px}#sidebar{float:left;width:20.875%}#left-area{width:79.125%;padding-bottom:23px}#main-content .container:before{content:"";position:absolute;top:0;height:100%;width:1px;background-color:#e2e2e2}.et_right_sidebar #left-area{float:left;padding-right:5.5%}.et_right_sidebar #sidebar{padding-left:30px}.et_right_sidebar #main-content .container:before{right:20.875%!important}}@media (min-width:981px) and (max-width:1100px){#sidebar .et_pb_widget{margin-left:0}}@media (max-width:980px){#page-container,.et_fixed_nav.et_show_nav #page-container,.et_fixed_nav.et_show_nav.et_secondary_nav_enabled #page-container{padding-top:80px}#left-area,#sidebar{width:100%!important}.et_right_sidebar #left-area,.et_right_sidebar #sidebar{width:auto;float:none;padding-right:0;padding-left:0}.et_right_sidebar #left-area{margin-right:0}.et_right_sidebar #sidebar{margin-left:0;border-left:none}#main-content .container:before{display:none!important}.footer-widget:nth-child(n){width:46.25%!important;margin:0 7.5% 7.5% 0!important}#footer-widgets .footer-widget .fwidget{margin-bottom:16.21%}#footer-widgets{padding:8% 0}#footer-widgets .footer-widget:nth-child(2n){margin-right:0!important}#footer-widgets .footer-widget:nth-last-child(-n+2){margin-bottom:0!important}#main-header,#top-header{transition:none;-webkit-transition:none;-moz-transition:none}#top-menu{display:none}#et-top-navigation{margin-right:0;transition:none;-webkit-transition:none;-moz-transition:none}.et_fixed_nav #main-header,.et_fixed_nav #top-header{position:absolute}.et_header_style_left #et-top-navigation{padding-top:24px;display:block}.et_fixed_nav #main-header{-webkit-transition:none;transition:none}#et-secondary-menu,#et-secondary-nav{display:none!important}#top-header .container{padding-top:0}#et-info{padding-top:.75em}#logo,#main-header,.container,.logo_container{transition:none;-webkit-transition:none;-moz-transition:none}.et_header_style_left #logo{max-width:50%}.et_header_style_left .et-search-form{width:50%!important;max-width:50%!important}#footer-info,.et-social-icons{float:none;text-align:center}.et-social-icons{margin:0 0 5px}#top-header .et-social-icons{margin-bottom:0}#et_mobile_nav_menu{display:block}}@media (max-width:767px){#footer-widgets .footer-widget{width:100%!important;margin-right:0!important}#footer-widgets .footer-widget .fwidget,#footer-widgets .footer-widget:nth-child(n){margin-bottom:9.5%!important}#footer-widgets{padding:10% 0}#footer-widgets .footer-widget .fwidget:last-child,#footer-widgets .footer-widget:last-child{margin-bottom:0!important}#et-info .et-social-icons{display:none}#et-top-navigation{margin-right:0}body.et_fixed_nav.et_secondary_nav_two_panels #main-header{top:58px}#et-info,#et-secondary-menu{text-align:center;display:block;float:none}.et_secondary_nav_two_panels #et-secondary-menu{margin-top:12px}}@media (max-width:479px){#et-top-navigation{margin-right:0}#footer-widgets .footer-widget:nth-child(n),.footer-widget .fwidget{margin-bottom:11.5%!important}#footer-widgets{padding:12% 0}}@media print{#main-header,#top-header{position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important}#page-container{padding-top:0!important}}@font-face{font-family:ETmodules;font-display:swap;src:url(https://cablevey.com/wp-content/themes/Divi/core/admin/fonts/modules.eot);src:url("https://cablevey.com/wp-content/themes/Divi/core/admin/fonts/modules.eot#iefix") format("embedded-opentype"),url(https://cablevey.com/wp-content/themes/Divi/core/admin/fonts/modules.ttf) format("truetype"),url(https://cablevey.com/wp-content/themes/Divi/core/admin/fonts/modules.woff) format("woff"),url("https://cablevey.com/wp-content/themes/Divi/core/admin/fonts/modules.svg#ETmodules") format("svg");font-weight:400;font-style:normal}@media (min-width:981px){.et_pb_gutters3 .footer-widget{margin-right:5.5%;margin-bottom:5.5%}.et_pb_gutters3 .footer-widget:last-child{margin-right:0}.et_pb_gutters3.et_pb_footer_columns4 .footer-widget{width:20.875%}.et_pb_gutters3.et_pb_footer_columns4 .footer-widget .fwidget{margin-bottom:26.347%}}*{-webkit-box-sizing:border-box;box-sizing:border-box}#et-info-email:before,#et-info-phone:before,.mobile_menu_bar:before{font-family:ETmodules!important;speak:none;font-style:normal;font-weight:400;-webkit-font-feature-settings:normal;font-feature-settings:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-shadow:0 0;direction:ltr}.et-pb-icon{font-family:ETmodules;content:attr(data-icon);speak:none;font-weight:400;-webkit-font-feature-settings:normal;font-feature-settings:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;font-size:96px;font-style:normal;display:inline-block;-webkit-box-sizing:border-box;box-sizing:border-box;direction:ltr}.nav li li{padding:0 20px;margin:0}.nav li{position:relative;line-height:1em}.nav li li{position:relative;line-height:2em}.nav li ul{position:absolute;padding:20px 0;z-index:9999;width:240px;background:#fff;visibility:hidden;opacity:0;border-top:3px solid #2ea3f2;box-shadow:0 2px 5px rgba(0,0,0,.1);-moz-box-shadow:0 2px 5px rgba(0,0,0,.1);-webkit-box-shadow:0 2px 5px rgba(0,0,0,.1);-webkit-transform:translateZ(0);text-align:left}.nav li:hover>ul{opacity:1;visibility:visible}.nav li li ul{z-index:1000;top:-23px;left:240px}.nav li:hover{visibility:inherit}.nav li li a{font-size:14px;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.nav ul li a:hover{background-color:rgba(0,0,0,.03);opacity:.7}.mobile_menu_bar{position:relative;display:block;line-height:0}.mobile_menu_bar:before{content:"a";font-size:32px;position:relative;left:0;top:0;cursor:pointer}.mobile_nav .select_page{display:none}.et_pb_widget{float:left;max-width:100%}.et_pb_widget a{text-decoration:none;color:#666}.et_pb_widget li a:hover{color:#82c0c7}.et_pb_widget ul li{margin-bottom:.5em}.et_pb_widget ul li ul li{margin-left:15px}.et_pb_post,.et_pb_widget{word-wrap:break-word}.et_pb_post{margin-bottom:60px}.et_pb_post .entry-title a,.et_pb_post h2 a{text-decoration:none}.et_pb_post .post-meta{font-size:14px;margin-bottom:6px}.et_pb_post .post-meta a{text-decoration:none}.et_pb_post a img{vertical-align:bottom;max-width:100%}@-webkit-keyframes et_pb_video_slider_item_fade_out{0%{opacity:1}to{opacity:0}}@keyframes et_pb_video_slider_item_fade_out{0%{opacity:1}to{opacity:0}}@-webkit-keyframes et_pb_video_slider_item_overlay_fade_out{0%{-webkit-transform:scale(1);transform:scale(1)}to{-webkit-transform:scale(.8);transform:scale(.8)}}@keyframes et_pb_video_slider_item_overlay_fade_out{0%{-webkit-transform:scale(1);transform:scale(1)}to{-webkit-transform:scale(.8);transform:scale(.8)}}@-webkit-keyframes et_pb_video_slider_item_fade_in{0%{opacity:0;-webkit-transform:scale(.8);transform:scale(.8)}to{opacity:1;-webkit-transform:scale(1);transform:scale(1)}}@keyframes et_pb_video_slider_item_fade_in{0%{opacity:0;-webkit-transform:scale(.8);transform:scale(.8)}to{opacity:1;-webkit-transform:scale(1);transform:scale(1)}}.et_pb_post .entry-content{padding-top:30px}@-webkit-keyframes fadeBottom{0%{opacity:0;-webkit-transform:translateY(10%)}to{opacity:1;-webkit-transform:translateY(0)}}@keyframes fadeBottom{0%{opacity:0;-webkit-transform:translateY(10%);transform:translateY(10%)}to{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes fadeLeft{0%{opacity:0;-webkit-transform:translateX(-10%)}to{opacity:1;-webkit-transform:translateX(0)}}@keyframes fadeLeft{0%{opacity:0;-webkit-transform:translateX(-10%);transform:translateX(-10%)}to{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translateX(-100%)}to{opacity:1;-webkit-transform:translateX(0)}}@keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translateX(-100%);transform:translateX(-100%)}to{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes fadeRight{0%{opacity:0;-webkit-transform:translateX(10%)}to{opacity:1;-webkit-transform:translateX(0)}}@keyframes fadeRight{0%{opacity:0;-webkit-transform:translateX(10%);transform:translateX(10%)}to{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes fadeOutRight{0%{opacity:1;-webkit-transform:translateX(0)}to{opacity:0;-webkit-transform:translateX(100%)}}@keyframes fadeOutRight{0%{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}to{opacity:0;-webkit-transform:translateX(100%);transform:translateX(100%)}}@-webkit-keyframes fadeInTop{0%{opacity:0;-webkit-transform:translatey(-60%)}to{opacity:1;-webkit-transform:translatey(0)}}@keyframes fadeInTop{0%{opacity:0;-webkit-transform:translatey(-60%);transform:translatey(-60%)}to{opacity:1;-webkit-transform:translatey(0);transform:translatey(0)}}@-webkit-keyframes fadeOutTop{0%{opacity:1;-webkit-transform:translatey(0)}to{opacity:0;-webkit-transform:translatey(-60%)}}@keyframes fadeOutTop{0%{opacity:1;-webkit-transform:translatey(0);transform:translatey(0)}to{opacity:0;-webkit-transform:translatey(-60%);transform:translatey(-60%)}}@-webkit-keyframes fadeInBottom{0%{opacity:0;-webkit-transform:translatey(60%)}to{opacity:1;-webkit-transform:translatey(0)}}@keyframes fadeInBottom{0%{opacity:0;-webkit-transform:translatey(60%);transform:translatey(60%)}to{opacity:1;-webkit-transform:translatey(0);transform:translatey(0)}}@-webkit-keyframes fadeOutBottom{0%{opacity:1;-webkit-transform:translatey(0)}to{opacity:0;-webkit-transform:translatey(60%)}}@keyframes fadeOutBottom{0%{opacity:1;-webkit-transform:translatey(0);transform:translatey(0)}to{opacity:0;-webkit-transform:translatey(60%);transform:translatey(60%)}}@-webkit-keyframes fadeOutLeft{0%{opacity:1;-webkit-transform:translateX(0)}to{opacity:0;-webkit-transform:translateX(-70%)}}@keyframes fadeOutLeft{0%{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}to{opacity:0;-webkit-transform:translateX(-70%);transform:translateX(-70%)}}@-webkit-keyframes fadeTop{0%{opacity:0;-webkit-transform:translateY(-10%)}to{opacity:1;-webkit-transform:translateX(0)}}@keyframes fadeTop{0%{opacity:0;-webkit-transform:translateY(-10%);transform:translateY(-10%)}to{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes fadeInRight{0%{opacity:0;-webkit-transform:translateX(100%)}to{opacity:1;-webkit-transform:translateX(0)}}@keyframes fadeInRight{0%{opacity:0;-webkit-transform:translateX(100%);transform:translateX(100%)}to{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes Grow{0%{opacity:0;-webkit-transform:scaleY(.5)}to{opacity:1;-webkit-transform:scale(1)}}@keyframes Grow{0%{opacity:0;-webkit-transform:scaleY(.5);transform:scaleY(.5)}to{opacity:1;-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes fadeIn{0%{opacity:0}to{opacity:1}}@-webkit-keyframes slideWidth{0%{width:0}}@keyframes slideWidth{0%{width:0}}@-webkit-keyframes gridFadeIn{0%{opacity:0;-webkit-transform:translatey(-5%)}to{opacity:1;-webkit-transform:translatey(0)}}@keyframes gridFadeIn{0%{opacity:0;-webkit-transform:translatey(-5%);transform:translatey(-5%)}to{opacity:1;-webkit-transform:translatey(0);transform:translatey(0)}}@-webkit-keyframes flipInX{0%{-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}40%{-webkit-transform:perspective(400px) rotateX(-20deg);transform:perspective(400px) rotateX(-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{-webkit-transform:perspective(400px) rotateX(10deg);transform:perspective(400px) rotateX(10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotateX(-5deg);transform:perspective(400px) rotateX(-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@keyframes flipInX{0%{-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}40%{-webkit-transform:perspective(400px) rotateX(-20deg);transform:perspective(400px) rotateX(-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{-webkit-transform:perspective(400px) rotateX(10deg);transform:perspective(400px) rotateX(10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotateX(-5deg);transform:perspective(400px) rotateX(-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@-webkit-keyframes flipInY{0%{-webkit-transform:perspective(400px) rotateY(90deg);transform:perspective(400px) rotateY(90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}40%{-webkit-transform:perspective(400px) rotateY(-20deg);transform:perspective(400px) rotateY(-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{-webkit-transform:perspective(400px) rotateY(10deg);transform:perspective(400px) rotateY(10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotateY(-5deg);transform:perspective(400px) rotateY(-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@keyframes flipInY{0%{-webkit-transform:perspective(400px) rotateY(90deg);transform:perspective(400px) rotateY(90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}40%{-webkit-transform:perspective(400px) rotateY(-20deg);transform:perspective(400px) rotateY(-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{-webkit-transform:perspective(400px) rotateY(10deg);transform:perspective(400px) rotateY(10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotateY(-5deg);transform:perspective(400px) rotateY(-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@media (min-width:981px) and (max-width:1100px){.et_pb_post{margin-bottom:42px}}@media (max-width:980px){.et_pb_post{margin-bottom:42px}}@media (max-width:767px){.et_pb_post{margin-bottom:42px}.et_pb_post>h2{font-size:18px}}@media (max-width:479px){.et_pb_post{margin-bottom:42px}.et_pb_post>h2{font-size:16px;padding-bottom:0}.et_pb_post .post-meta{color:#666;font-size:14px}}@-webkit-keyframes et_pb_fade{to{opacity:1}}@keyframes et_pb_fade{to{opacity:1}}@-webkit-keyframes et_pb_fadeTop{0%{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes et_pb_fadeTop{0%{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes et_pb_fadeRight{0%{-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes et_pb_fadeRight{0%{-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes et_pb_fadeBottom{0%{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes et_pb_fadeBottom{0%{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes et_pb_fadeLeft{0%{-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes et_pb_fadeLeft{0%{-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes et_pb_slide{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes et_pb_slide{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@-webkit-keyframes et_pb_slideTop{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@keyframes et_pb_slideTop{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@-webkit-keyframes et_pb_slideRight{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@keyframes et_pb_slideRight{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@-webkit-keyframes et_pb_slideBottom{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@keyframes et_pb_slideBottom{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@-webkit-keyframes et_pb_slideLeft{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@keyframes et_pb_slideLeft{to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@-webkit-keyframes et_pb_bounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1;-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes et_pb_bounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1;-webkit-transform:scaleX(1);transform:scaleX(1)}}@-webkit-keyframes et_pb_bounceTop{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(0,-200px,0);transform:translate3d(0,-200px,0)}60%{-webkit-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}75%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}90%{-webkit-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}to{-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_bounceTop{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(0,-200px,0);transform:translate3d(0,-200px,0)}60%{-webkit-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}75%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}90%{-webkit-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}to{-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_bounceRight{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(200px,0,0);transform:translate3d(200px,0,0)}60%{-webkit-transform:translate3d(-25px,0,0);transform:translate3d(-25px,0,0)}75%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}90%{-webkit-transform:translate3d(-5px,0,0);transform:translate3d(-5px,0,0)}to{-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_bounceRight{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(200px,0,0);transform:translate3d(200px,0,0)}60%{-webkit-transform:translate3d(-25px,0,0);transform:translate3d(-25px,0,0)}75%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}90%{-webkit-transform:translate3d(-5px,0,0);transform:translate3d(-5px,0,0)}to{-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_bounceBottom{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(0,200px,0);transform:translate3d(0,200px,0)}60%{-webkit-transform:translate3d(0,-25px,0);transform:translate3d(0,-25px,0)}75%{-webkit-transform:translate3d(0,10px,0);transform:translate3d(0,10px,0)}90%{-webkit-transform:translate3d(0,-5px,0);transform:translate3d(0,-5px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@keyframes et_pb_bounceBottom{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(0,200px,0);transform:translate3d(0,200px,0)}60%{-webkit-transform:translate3d(0,-25px,0);transform:translate3d(0,-20px,0)}75%{-webkit-transform:translate3d(0,10px,0);transform:translate3d(0,10px,0)}90%{-webkit-transform:translate3d(0,-5px,0);transform:translate3d(0,-5px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0);opacity:1}}@-webkit-keyframes et_pb_bounceLeft{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(-200px,0,0);transform:translate3d(-200px,0,0)}60%{-webkit-transform:translate3d(25px,0,0);transform:translate3d(25px,0,0)}75%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}90%{-webkit-transform:translate3d(5px,0,0);transform:translate3d(5px,0,0)}to{-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_bounceLeft{0%,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(-200px,0,0);transform:translate3d(-200px,0,0)}60%{-webkit-transform:translate3d(25px,0,0);transform:translate3d(25px,0,0)}75%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}90%{-webkit-transform:translate3d(5px,0,0);transform:translate3d(5px,0,0)}to{-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_zoom{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes et_pb_zoom{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@-webkit-keyframes et_pb_zoomTop{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes et_pb_zoomTop{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@-webkit-keyframes et_pb_zoomRight{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes et_pb_zoomRight{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@-webkit-keyframes et_pb_zoomBottom{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes et_pb_zoomBottom{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@-webkit-keyframes et_pb_zoomLeft{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes et_pb_zoomLeft{to{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@-webkit-keyframes et_pb_flip{to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@keyframes et_pb_flip{to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@-webkit-keyframes et_pb_flipTop{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@keyframes et_pb_flipTop{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@-webkit-keyframes et_pb_flipRight{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@keyframes et_pb_flipRight{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@-webkit-keyframes et_pb_flipBottom{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@keyframes et_pb_flipBottom{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@-webkit-keyframes et_pb_flipLeft{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@keyframes et_pb_flipLeft{0%{-webkit-transform-origin:center;transform-origin:center}to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@-webkit-keyframes et_pb_fold{to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@keyframes et_pb_fold{to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@-webkit-keyframes et_pb_foldTop{to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@keyframes et_pb_foldTop{to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@-webkit-keyframes et_pb_foldRight{to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@keyframes et_pb_foldRight{to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@-webkit-keyframes et_pb_foldBottom{to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@keyframes et_pb_foldBottom{to{opacity:1;-webkit-transform:perspective(0) rotateX(0deg);transform:perspective(0) rotateX(0deg)}}@-webkit-keyframes et_pb_foldLeft{to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@keyframes et_pb_foldLeft{to{opacity:1;-webkit-transform:perspective(0) rotateY(0deg);transform:perspective(0) rotateY(0deg)}}@-webkit-keyframes et_pb_roll{0%{-webkit-transform-origin:center;transform-origin:center}to{-webkit-transform-origin:center;transform-origin:center;-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_roll{0%{-webkit-transform-origin:center;transform-origin:center}to{-webkit-transform-origin:center;transform-origin:center;-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_rollTop{0%{-webkit-transform-origin:top;transform-origin:top}to{-webkit-transform-origin:top;transform-origin:top;-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_rollTop{0%{-webkit-transform-origin:top;transform-origin:top}to{-webkit-transform-origin:top;transform-origin:top;-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_rollRight{0%{-webkit-transform-origin:right;transform-origin:right}to{-webkit-transform-origin:right;transform-origin:right;-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_rollRight{0%{-webkit-transform-origin:right;transform-origin:right}to{-webkit-transform-origin:right;transform-origin:right;-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_rollBottom{0%{-webkit-transform-origin:bottom;transform-origin:bottom}to{-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_rollBottom{0%{-webkit-transform-origin:bottom;transform-origin:bottom}to{-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:none;transform:none;opacity:1}}@-webkit-keyframes et_pb_rollLeft{0%{-webkit-transform-origin:left;transform-origin:left}to{-webkit-transform-origin:left;transform-origin:left;-webkit-transform:none;transform:none;opacity:1}}@keyframes et_pb_rollLeft{0%{-webkit-transform-origin:left;transform-origin:left}to{-webkit-transform-origin:left;transform-origin:left;-webkit-transform:none;transform:none;opacity:1}}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute!important;width:1px;word-wrap:normal!important}.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}* html .clearfix,:first-child+html .clearfix{zoom:1}body.custom-background{background-color:#fff}body{font-size:16px}#top-header,#et-secondary-nav li ul{background-color:#07387e}#top-menu li a{font-size:18px}#footer-widgets .footer-widget a,#footer-widgets .footer-widget li a,#footer-widgets .footer-widget li a:hover{color:#fff}.footer-widget{color:#fff}#footer-widgets .footer-widget li:before{top:10.6px}body.single #left-area .et_pb_post .post-meta{line-height:1.5em}body.single .et_post_meta_wrapper h1{line-height:1.3em}body.single .et_post_meta_wrapper h1{font-weight:700;font-style:normal;text-transform:none;text-decoration:none}@media only screen and (min-width:981px){.et_header_style_left #et-top-navigation{padding:30px 0 0 0}.et_header_style_left #et-top-navigation nav>ul>li>a{padding-bottom:30px}#logo{max-height:100%}}h1,h2,h4{font-family:"Abel",Helvetica,Arial,Lucida,sans-serif}#main-header,#et-top-navigation{font-family:"Abel",Helvetica,Arial,Lucida,sans-serif}#logo{max-height:100%}#top-menu li{padding-right:15px}#footer-widgets .footer-widget li.wpml-ls-item:before{content:none}#footer-widgets .footer-widget li.wpml-ls-item a{color:#555}#footer-widgets .footer-widget li.wpml-ls-item a:hover{color:#000}.entry-title>a{font-size:20px;letter-spacing:0;font-weight:700}#logo{max-height:80%}#top-menu li{padding-right:15px}#footer-widgets .footer-widget li.wpml-ls-item:before{content:none}#footer-widgets .footer-widget li.wpml-ls-item a{color:#555}#footer-widgets .footer-widget li.wpml-ls-item a:hover{color:#000}.entry-title>a{font-size:20px;letter-spacing:0;font-weight:700}sup{font-size:.5em;vertical-align:super;bottom:0}</style>
+	<meta name="description" content="To better understand the technologies and equipment used in the breakfast cereal industry, we need to look at the manufacturing process." />
+	<link rel="canonical" href="https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Technologies and Equipment Involved in Breakfast Cereal Production and Processing" />
+	<meta property="og:description" content="To better understand the technologies and equipment used in the breakfast cereal industry, we need to look at the manufacturing process." />
+	<meta property="og:url" content="https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/" />
+	<meta property="og:site_name" content="Cablevey® Conveyors" />
+	<meta property="article:published_time" content="2020-07-29T17:05:58+00:00" />
+	<meta property="article:modified_time" content="2020-07-29T17:08:07+00:00" />
+	<meta property="og:image" content="https://cablevey.com/wp-content/uploads/2020/07/Technologies-and-Equipment-Involved-in-Breakfast-Cereal-Production-and-Processing.jpg" />
+	<meta property="og:image:width" content="700" />
+	<meta property="og:image:height" content="400" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Karl Seidel" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="8 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://cablevey.com/#website","url":"https://cablevey.com/","name":"Cablevey\u00ae Conveyors","description":"Cable &amp; Disc Tubular Drag Conveyor Systems | Cablevey","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://cablevey.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/#primaryimage","inLanguage":"en-US","url":"https://cablevey.com/wp-content/uploads/2020/07/Technologies-and-Equipment-Involved-in-Breakfast-Cereal-Production-and-Processing.jpg","contentUrl":"https://cablevey.com/wp-content/uploads/2020/07/Technologies-and-Equipment-Involved-in-Breakfast-Cereal-Production-and-Processing.jpg","width":700,"height":400,"caption":"Technologies and Equipment Involved in Breakfast Cereal Production and Processing"},{"@type":"WebPage","@id":"https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/#webpage","url":"https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/","name":"Technologies and Equipment Involved in Breakfast Cereal Production and Processing - Cablevey\u00ae Conveyors","isPartOf":{"@id":"https://cablevey.com/#website"},"primaryImageOfPage":{"@id":"https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/#primaryimage"},"datePublished":"2020-07-29T17:05:58+00:00","dateModified":"2020-07-29T17:08:07+00:00","author":{"@id":"https://cablevey.com/#/schema/person/90d8aee79d9363c549d3907b006347f1"},"description":"To better understand the technologies and equipment used in the breakfast cereal industry, we need to look at the manufacturing process.","breadcrumb":{"@id":"https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/"]}]},{"@type":"BreadcrumbList","@id":"https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cablevey.com/"},{"@type":"ListItem","position":2,"name":"Technologies and Equipment Involved in Breakfast Cereal Production and Processing"}]},{"@type":"Person","@id":"https://cablevey.com/#/schema/person/90d8aee79d9363c549d3907b006347f1","name":"Karl Seidel","image":{"@type":"ImageObject","@id":"https://cablevey.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/6d6c475ab34e471aab9000b48b5abd81?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/6d6c475ab34e471aab9000b48b5abd81?s=96&d=mm&r=g","caption":"Karl Seidel"}}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//addsearch.com' />
+<link rel='dns-prefetch' href='//js.hs-scripts.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Cablevey® Conveyors &raquo; Feed" href="https://cablevey.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Cablevey® Conveyors &raquo; Comments Feed" href="https://cablevey.com/comments/feed/" />
+<meta content="Divi v.4.9.11" name="generator"/>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='//cablevey.com/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-dropdown/script.min.js?ver=1' id='wpml-legacy-dropdown-0-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='//cablevey.com/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-dropdown-click/script.min.js?ver=1' id='wpml-legacy-dropdown-click-0-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/popups-for-divi/scripts/ie-compat.min.js?ver=3.0.3' id='dap-ie-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/wp-image-zoooom/assets/js/jquery.image_zoom.min.js?ver=1.47.1' id='image_zoooom-js'></script>
+<script type='text/javascript' id='image_zoooom-init-js-extra'>
+/* <![CDATA[ */
+var IZ = {"with_woocommerce":"0","exchange_thumbnails":"1","woo_categories":"0","enable_mobile":"1","options":{"lensShape":"round","zoomType":"lens","lensSize":350,"borderSize":1,"borderColour":"#ffffff","cursor":"pointer","lensFadeIn":1,"lensFadeOut":1,"tint":"true","tintColour":"#2597cd","tintOpacity":0.5},"woo_slider":"0"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/wp-image-zoooom/assets/js/image_zoom-init.js?ver=1.47.1' id='image_zoooom-init-js'></script>
+<link rel="https://api.w.org/" href="https://cablevey.com/wp-json/" /><link rel="alternate" type="application/json" href="https://cablevey.com/wp-json/wp/v2/posts/12248" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cablevey.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cablevey.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://cablevey.com/?p=12248' />
+<link rel="alternate" type="application/json+oembed" href="https://cablevey.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcablevey.com%2Ftechnologies-and-equipment-involved-in-breakfast-cereal-production-and-processing%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://cablevey.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcablevey.com%2Ftechnologies-and-equipment-involved-in-breakfast-cereal-production-and-processing%2F&#038;format=xml" />
+<meta name="generator" content="WPML ver:4.4.10 stt:1,44,2;" />
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://secure.risk8belt.com/js/213096.js" ></script>
+<noscript><img alt="" src="https://secure.risk8belt.com/213096.png" style="display:none;" /></noscript>			<!-- DO NOT COPY THIS SNIPPET! Start of Page Analytics Tracking for HubSpot WordPress plugin v8.4.90-->
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+				var _hsq = _hsq || [];
+				_hsq.push(["setContentType", "blog-post"]);
+			</script>
+			<!-- DO NOT COPY THIS SNIPPET! End of Page Analytics Tracking for HubSpot WordPress plugin -->
+						<script type="rocketlazyloadscript">
+				(function() {
+					var hbspt = window.hbspt = window.hbspt || {};
+					hbspt.forms = hbspt.forms || {};
+					hbspt._wpFormsQueue = [];
+					hbspt.enqueueForm = function(formDef) {
+						if (hbspt.forms && hbspt.forms.create) {
+							hbspt.forms.create(formDef);
+						} else {
+							hbspt._wpFormsQueue.push(formDef);
+						}
+					}
+					if (!window.hbspt.forms.create) {
+						Object.defineProperty(window.hbspt.forms, 'create', {
+							configurable: true,
+							get: function() {
+								return hbspt._wpCreateForm;
+							},
+							set: function(value) {
+								hbspt._wpCreateForm = value;
+								while (hbspt._wpFormsQueue.length) {
+									var formDef = hbspt._wpFormsQueue.shift();
+									if (!document.currentScript) {
+										var formScriptId = 'leadin-forms-v2-js';
+										hubspot.utils.currentScript = document.getElementById(formScriptId);
+									}
+									hbspt._wpCreateForm.call(hbspt.forms, formDef);
+								}
+							},
+						});
+					}
+				})();
+			</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /><link rel="preload" href="https://cablevey.com/wp-content/themes/Divi/core/admin/fonts/modules.ttf" as="font" crossorigin="anonymous">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=UA-66787086-1"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66787086-1');
+</script>
+
+<meta name="google-site-verification" content="e1C3jbeYvbcNGEVf9Z5DHSjdItueXOLJ8FVZsELAnPM">
+
+
+
+<script type="rocketlazyloadscript" src="//rum-static.pingdom.net/pa-5ed12460bb9131001500022c.js" async></script>
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="//cdn.rlets.com/capture_configs/0b7/671/e31/fdb4fb18a675a75abdc3973.js" async="async"></script>
+
+<!-- Google Analytics -->
+<script type="rocketlazyloadscript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-66787086-1', 'auto');
+ga('require', 'OPT-MXH2LBV');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><link rel="icon" href="https://cablevey.com/wp-content/uploads/2014/11/cablevey-logo-49x49.png" sizes="32x32" />
+<link rel="icon" href="https://cablevey.com/wp-content/uploads/2014/11/cablevey-logo.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://cablevey.com/wp-content/uploads/2014/11/cablevey-logo.png" />
+<meta name="msapplication-TileImage" content="https://cablevey.com/wp-content/uploads/2014/11/cablevey-logo.png" />
+</head>
+<body class="post-template-default single single-post postid-12248 single-format-standard custom-background et_pb_button_helper_class et_fullwidth_nav et_fullwidth_secondary_nav et_fixed_nav et_show_nav et_pb_show_title et_secondary_nav_enabled et_secondary_nav_two_panels et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_expand et_header_style_left et_pb_footer_columns4 et_cover_background et_pb_gutter windows et_pb_gutters3 et_right_sidebar et_divi_theme et-db et_minified_js et_minified_css">
+	<div id="page-container">
+
+					<div id="top-header">
+			<div class="container clearfix">
+
+			
+				<div id="et-info">
+									<span id="et-info-phone">1 (800) 247-3344</span>
+				
+									<a href="/cdn-cgi/l/email-protection#c0a9aea6af80a3a1a2aca5b6a5b9eea3afad"><span id="et-info-email"><span class="__cf_email__" data-cfemail="335a5d555c735052515f5645564a1d505c5e">[email&#160;protected]</span></span></a>
+				
+								</div> <!-- #et-info -->
+
+			
+				<div id="et-secondary-menu">
+				<ul id="et-secondary-nav" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9281"><a href="tel:1-800-247-3344">1 (800) 247-3344</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9282"><a href="/cdn-cgi/l/email-protection#0b62656d644b686a69676e7d6e7225686466"><span class="__cf_email__" data-cfemail="761f181019361517141a1300130f5815191b">[email&#160;protected]</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10163"><a href="https://cablevey.com/request-a-quote/">Request a Quote</a></li>
+</ul>				</div> <!-- #et-secondary-menu -->
+
+			</div> <!-- .container -->
+		</div> <!-- #top-header -->
+		
+	
+			<header id="main-header" data-height-onload="60">
+			<div class="container clearfix et_menu_container">
+							<div class="logo_container">
+					<span class="logo_helper"></span>
+					<a href="https://cablevey.com/">
+						<img src="https://cablevey.com/wp-content/uploads/2021/04/Cablevey-logo-The-Gentle-Way-to-Convey-®120x60.jpg" width="93" height="43" alt="Cablevey® Conveyors" id="logo" data-height-percentage="100" />
+					</a>
+				</div>
+							<div id="et-top-navigation" data-height="60" data-fixed-height="40">
+											<nav id="top-menu-nav">
+						<ul id="top-menu" class="nav"><li id="menu-item-11830" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-11830"><a href="https://cablevey.com/">Home</a></li>
+<li id="menu-item-11239" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11239"><a href="https://cablevey.com/about-us/">About us</a></li>
+<li id="menu-item-5163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5163"><a href="https://cablevey.com/enclosed-tubular-drag-cable-and-disc-conveyor-systems/">Our Technology</a></li>
+<li id="menu-item-5316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5316"><a href="https://cablevey.com/tube-conveyor-uses/">Products Moved</a>
+<ul class="sub-menu">
+	<li id="menu-item-5146" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5146"><a href="https://cablevey.com/tube-conveyor-uses/">All Industries</a></li>
+	<li id="menu-item-5676" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5676"><a href="https://cablevey.com/tube-conveyor-uses/food-conveyor-system/coffee-bean-conveyor/">Coffee</a></li>
+	<li id="menu-item-5182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5182"><a href="https://cablevey.com/tube-conveyor-uses/nut-conveyor-system/">Nuts</a>
+	<ul class="sub-menu">
+		<li id="menu-item-5673" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5673"><a href="https://cablevey.com/tube-conveyor-uses/nut-conveyor-system/almond-conveyor/">Almonds</a></li>
+		<li id="menu-item-5672" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5672"><a href="https://cablevey.com/tube-conveyor-uses/nut-conveyor-system/peanut-conveyor/">Peanuts</a></li>
+	</ul>
+</li>
+	<li id="menu-item-5678" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5678"><a href="https://cablevey.com/tube-conveyor-uses/food-conveyor-system/snack-food-conveyor/">Snack Food</a></li>
+	<li id="menu-item-5682" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5682"><a href="https://cablevey.com/tube-conveyor-uses/feed-conveyor-system/pet-food-conveyor/">Pet Food</a>
+	<ul class="sub-menu">
+		<li id="menu-item-5178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5178"><a href="https://cablevey.com/tube-conveyor-uses/feed-conveyor-system/">Feed</a></li>
+		<li id="menu-item-12247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12247"><a href="https://cablevey.com/tube-conveyor-uses/feed-conveyor-system/cablevey-wild-bird-seed-conveyor-systems/">Wild Bird Seeds</a></li>
+	</ul>
+</li>
+	<li id="menu-item-5674" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5674"><a href="https://cablevey.com/tube-conveyor-uses/food-conveyor-system/cereal-conveyor/">Breakfast Cereal</a></li>
+	<li id="menu-item-5681" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5681"><a href="https://cablevey.com/tube-conveyor-uses/grain-conveyor-system/grain-conveyor/">Breweries</a>
+	<ul class="sub-menu">
+		<li id="menu-item-5180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5180"><a href="https://cablevey.com/tube-conveyor-uses/grain-conveyor-system/">Specialty Grains</a></li>
+	</ul>
+</li>
+	<li id="menu-item-5675" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5675"><a href="https://cablevey.com/tube-conveyor-uses/dry-bean-conveyor/">Specialty Seeds &#038; Beans</a></li>
+	<li id="menu-item-10213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10213"><a href="https://cablevey.com/tube-conveyor-uses/dry-bean-conveyor/industrial-hemp-conveyors/">Hemp</a></li>
+	<li id="menu-item-5677" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5677"><a href="https://cablevey.com/tube-conveyor-uses/food-conveyor-system/frozen-food-conveyor/">Frozen Food</a></li>
+	<li id="menu-item-5184" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5184"><a href="https://cablevey.com/tube-conveyor-uses/powder-transfer-system/">Powders</a></li>
+	<li id="menu-item-5679" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5679"><a href="https://cablevey.com/tube-conveyor-uses/grain-conveyor-system/rice-conveyor/">Rice</a></li>
+	<li id="menu-item-9271" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9271"><a href="#">General Food</a>
+	<ul class="sub-menu">
+		<li id="menu-item-9270" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9270"><a href="https://cablevey.com/tube-conveyor-uses/food-conveyor-system/">Baking Ingredients</a></li>
+	</ul>
+</li>
+	<li id="menu-item-9268" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9268"><a href="#">Industrial Materials</a>
+	<ul class="sub-menu">
+		<li id="menu-item-5183" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5183"><a href="https://cablevey.com/tube-conveyor-uses/plastic-conveyor-system/">Plastics</a></li>
+		<li id="menu-item-5177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5177"><a href="https://cablevey.com/tube-conveyor-uses/biomass-conveyor-system/">Renewable Energy</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-5249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5249"><a href="https://cablevey.com/cable-conveyors/">Conveyors</a>
+<ul class="sub-menu">
+	<li id="menu-item-5250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5250"><a href="https://cablevey.com/cable-conveyors/">Tube Conveyors</a></li>
+	<li id="menu-item-5147" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5147"><a href="https://cablevey.com/cable-conveyors/two-inch-tube-conveyor-systems/">2&#8243; Diameter (50mm)</a></li>
+	<li id="menu-item-5148" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5148"><a href="https://cablevey.com/cable-conveyors/four-inch-popular-conveyor/">4&#8243; Diameter (100mm)</a></li>
+	<li id="menu-item-5152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5152"><a href="https://cablevey.com/cable-conveyors/six-inch-high-volume-cable-conveyors/">6&#8243; Diameter (150mm)</a></li>
+	<li id="menu-item-10399" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10399"><a href="https://cablevey.com/cable-conveyors/eight-inch-high-volume-cable-conveyors/">8&#8243; Diameter (200mm)</a></li>
+	<li id="menu-item-7774" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7774"><a href="https://cablevey.com/conveyor-layouts-and-designs/">Conveyor Layouts and Designs</a></li>
+	<li id="menu-item-5162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5162"><a href="https://cablevey.com/enclosed-tubular-drag-cable-and-disc-conveyor-systems/compare-conveyor-systems/">Compare</a></li>
+</ul>
+</li>
+<li id="menu-item-8961" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-8961"><a href="#">Features</a>
+<ul class="sub-menu">
+	<li id="menu-item-7324" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7324"><a href="https://cablevey.com/conveyor-monitoring-system-cameras/">Internal Minicam</a></li>
+	<li id="menu-item-8840" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8840"><a href="https://cablevey.com/pneumatic-tensioning-air-cylinder/">Pneumatic Tensioning Air Cylinder</a></li>
+	<li id="menu-item-9305" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9305"><a href="https://cablevey.com/enclosed-tubular-drag-cable-and-disc-conveyor-systems/tube-conveyor-cleaning/">Cleaning</a></li>
+</ul>
+</li>
+<li id="menu-item-5176" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5176"><a href="https://cablevey.com/tube-conveyor-services/">Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-14147" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14147"><a href="https://cablevey.com/tube-conveyor-services/cablevey-product-testing/">Product Testing</a></li>
+</ul>
+</li>
+<li id="menu-item-9420" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9420"><a href="https://cablevey.com/brochures/">Brochures</a></li>
+<li id="menu-item-10438" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-10438"><a href="https://cablevey.com/blog/">Blog</a></li>
+<li id="menu-item-10164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-10164"><a href="https://cablevey.com/contact/">Contact</a>
+<ul class="sub-menu">
+	<li id="menu-item-10165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10165"><a href="https://cablevey.com/request-a-quote/">Request a Quote</a></li>
+</ul>
+</li>
+<li id="menu-item-wpml-ls-111-en" class="menu-item-language menu-item-language-current menu-item wpml-ls-slot-111 wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-first-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-wpml-ls-111-en"><a title="English" href="https://cablevey.com/technologies-and-equipment-involved-in-breakfast-cereal-production-and-processing/"><span class="wpml-ls-display">English</span></a></li>
+</ul>						</nav>
+					
+					
+					
+					
+					<div id="et_mobile_nav_menu">
+				<div class="mobile_nav closed">
+					<span class="select_page">Select Page</span>
+					<span class="mobile_menu_bar mobile_menu_bar_toggle"></span>
+				</div>
+			</div>				</div> <!-- #et-top-navigation -->
+			</div> <!-- .container -->
+			<div class="et_search_outer">
+				<div class="container et_search_form_container">
+					<form role="search" method="get" class="et-search-form" action="https://cablevey.com/">
+					<input type="search" class="et-search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" /><input type='hidden' name='lang' value='en' />					</form>
+					<span class="et_close_search_field"></span>
+				</div>
+			</div>
+		</header> <!-- #main-header -->
+			<div id="et-main-area">
+	
+<div id="main-content">
+		<div class="container">
+		<div id="content-area" class="clearfix">
+			<div id="left-area">
+											<article id="post-12248" class="et_pb_post post-12248 post type-post status-publish format-standard has-post-thumbnail hentry category-cablevey-news category-processed-food">
+											<div class="et_post_meta_wrapper">
+							<h1 class="entry-title">Technologies and Equipment Involved in Breakfast Cereal Production and Processing</h1>
+
+						<p class="post-meta"> by <span class="author vcard"><a href="https://cablevey.com/author/karlseidel/" title="Posts by Karl Seidel" rel="author">Karl Seidel</a></span> | <span class="published">Jul 29, 2020</span> | <a href="https://cablevey.com/category/cablevey-news/" rel="category tag">Cablevey News</a>, <a href="https://cablevey.com/category/processed-food/" rel="category tag">Processed Food</a></p><img src="https://cablevey.com/wp-content/uploads/2020/07/Technologies-and-Equipment-Involved-in-Breakfast-Cereal-Production-and-Processing.jpg" alt="Technologies and Equipment Involved in Breakfast Cereal Production and Processing" class="" width="1080" height="675" srcset="https://cablevey.com/wp-content/uploads/2020/07/Technologies-and-Equipment-Involved-in-Breakfast-Cereal-Production-and-Processing.jpg 1080w, https://cablevey.com/wp-content/uploads/2020/07/Technologies-and-Equipment-Involved-in-Breakfast-Cereal-Production-and-Processing-480x274.jpg 480w" sizes="(min-width: 0px) and (max-width: 480px) 480px, (min-width: 481px) 1080px, 100vw" />
+												</div> <!-- .et_post_meta_wrapper -->
+				
+					<div class="entry-content">
+					<p>Breakfast cereal is a type of processed food made from grain and intended to be eaten as a main course. In most cases, it&#8217;s served with milk, but it&#8217;s not uncommon for people to eat it with yogurt or plant-based milk. Even though the majority of today&#8217;s <a href="https://cablevey.com/a-guide-on-the-production-and-processing-of-breakfast-cereals/" target="_blank" rel="noopener noreferrer">breakfast cereals</a> are served cold, there are some that require cooking. However, these hot cereals are less popular and in lower demand than their cold, ready-to-eat counterparts.</p>
+<p>Numerous forms of cereal recipes have been created around the world since as early as the discovery of agriculture, cooking them in water to form various forms of gruels and porridge, similar to today&#8217;s hot cereals. <a href="https://www.thoughtco.com/what-the-romans-ate-120636" target="_blank" rel="noopener noreferrer">Most people in the Ancient Roman Empire</a> ate cereal grains with all meals, including porridge. Cold cereals only appeared during the second half of the 19th century. In large part, we have to thank <a href="https://www.mentalfloss.com/article/77286/retrobituaries-james-caleb-jackson-inventor-dry-breakfast-cereal" target="_blank" rel="noopener noreferrer">Dr. James Caleb Jackson</a>, <a href="https://daily.jstor.org/the-strange-backstory-behind-your-breakfast-cereal/" target="_blank" rel="noopener noreferrer">Dr. John Harvey Kellogg</a>, and <a href="https://www.britannica.com/biography/C-W-Post" target="_blank" rel="noopener noreferrer">Charles William Post</a> for this staple American breakfast. Some companies also use cereal, such as granola cereals to make cereal bars.</p>
+<p>Over the following decades, this once-healthy, whole-grain breakfast food started to be more processed and filled with sugar. Due to their successful marketing campaigns, the image also changed to a quick, convenient, and tasty food. Another factor to their success was the invention of corn flakes, which were more popular than wheat flakes. Today, 9 out of 10 Americans consume ready-to-eat breakfast cereals on a regular basis.</p>
+<h2><strong>Raw Materials Used in Breakfast Cereal Production Lines</strong></h2>
+<p>Unsurprisingly, the most common raw material used in traditional cereal is grain. The usual grains used are corn, barley, wheat, oats, and rice. Hot cereals like oatmeal, as well as some cold cereals like shredded wheat, have no additional ingredients. However, most breakfast cereals use a multitude of other ingredients, such as salt, sweeteners, yeast, coloring and flavoring agents, added vitamins, minerals, and preservatives.</p>
+<p>White and brown sugar, corn syrup, malt obtained from barely, and even concentrated fruit juice are being used as sweeteners in the industry. As far as flavors are concerned, the usual include chocolate, cinnamon, fruit, and other spices. Nuts, dried fruit, and marshmallows are also used for added flavoring. In many cases, vitamins and minerals are also added as a means of making up for the nutrients lost during the cooking process. Roughly 90% of vitamin B1 is destroyed by heat. Preservatives and antioxidants such as BHT and BHA are usually added to breakfast cereals to prevent them from going stale or rancid.</p>
+<h2><strong>Technologies and Equipment in Cereal Processing and Production</strong></h2>
+<p>To better understand the food processing technology and equipment that the cereal manufacture industry uses, we need to look at the manufacturing process for each type of cereal. The first step of the production process, regardless of the type of cream, is grain preparation. Grain, be it in the form of corn, wheat, oats, barley, etc., is brought to the cereal facility, inspected, and cleaned. Depending on the breakfast cereal, it may be used in the form of whole grains or may require some additional processing. In the majority of cases, the whole grain is crushed between metal rollers to remove the outer layer of bran. Sometimes, this grain is ground into flour.</p>
+<ul>
+<li><strong>Grains</strong> &#8211; If whole or partial grains are used, these are mixed with flavoring agents, sweeteners, salt, vitamins, minerals, and water in a rotating pressure cooker. All variations, including time, temperature, and rotation speed depend on the type of grain being used. Once cooked, the grain is <a href="https://cablevey.com/cereal-conveyor-story/" target="_blank" rel="noopener noreferrer">moved over a conveying system</a> through a drying oven. It&#8217;s important that enough moisture remains in the cooked grain so it will be a soft, solid mass that can be shaped as required.</li>
+<li><strong>Flour &#8211; </strong>If ground flour is used instead of whole or partial grain, a twin-screw cooker extruder is used, as opposed to a rotating pressure cooker. These twin-screw extruders mix the flour with all the other ingredients, such as salt, water, sweeteners, vitamins, food coloring, etc., mixing and cooking the composition as it travels along. At the other end of the extruder, the cooked dough emerges as an elongated ribbon, which is then cut by a rotating knife. The resulting pellets are then processed in a similar manner to cooked grains.</li>
+<li><strong>Flaked Cereals</strong></li>
+</ul>
+<p>The most widely-consumed breakfast cereals are also the most straightforward to produce. Corn flakes are the most common, but flaked cereals can also be made out of wheat, barley, oats, and rice. In any case, once the grains have been cooked, they are allowed to cool for several hours so that the moisture content within each grain has a chance to stabilize. This is what&#8217;s known in the industry as <a href="https://books.google.ro/books?id=jyzJDwAAQBAJ&amp;pg=PA291&amp;lpg=PA291&amp;dq=tempering+breakfast+cereal&amp;source=bl&amp;ots=gVHJ-SS74Y&amp;sig=ACfU3U3e67SLN0ZO3kVZQBkQzhOlMwr7dA&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwjmqsH95ejpAhVitIsKHaE5BBAQ6AEwDnoECAcQAQ#v=onepage&amp;q=tempering%20breakfast%20cereal&amp;f=false" target="_blank" rel="noopener noreferrer">tempering</a>.</p>
+<p>Once this process is complete, the grains are flattened between two large metal rollers under high pressure. The resulting flakes are then conveyed to an oven. Inside the oven, they are exposed to a blast of hot air that removes any remaining moisture and toasts the flakes until the desired color and flavor is achieved. It&#8217;s important to mention that flaked cereals can also be used to make extruded pellets by using a similar method.</p>
+<h4>●     <strong>Puffed Cereals</strong></h4>
+<p>Puffed cereals are also highly desirable among consumers. Typically, these types of cereal are made out of rice but can also be made out of wheat. The ovens used to puff the grains are known as <em>guns. </em>Unlike wheat, puffed rice is easier to produce as it requires no pretreatment. Once the rice is cooked, it is cooled and dried. Next, it’s rolled between metal rollers, similar to flaked cereals, but it’s only partially flattened through a process known as bumping. The bumped rice is then dried once again and placed in a very hot oven where it expands.</p>
+<p>Puffed wheat cereal, on the other hand, needs an additional level of treatment to remove the outer layer of bran. This is typically done using grindstones in a process known as pearling. A different process is to soak the wheat grains in saltwater. This brine-like solution hardens the bran, which causes it to break off during the puffing process. The grain is then placed in the gun, which is a relatively small vessel that holds hot steam at high pressures. The gun is then opened suddenly to release the pressure and puff the grain. The same process is applied to extruded pellets.</p>
+<h4>●     <strong>Shredded Cereals</strong></h4>
+<p>Shredded cereal is most commonly made out of wheat. Unlike the other processes above, shredded cereal is made by cooking and boiling the wheat in water so the moisture can fully penetrate the grain. The grain or extruded pellets are then tempered and rolled between two metal rollers. While one of the rollers is flat, the other one is grooved. A metal comb is set against the grooved roll, and a tooth is placed inside each groove. Due to its high moisture content, the grain is completely shredded by these teeth, dropping off the rollers as a continuous ribbon. This ribbon is then cut to the appropriate size and baked until the desired color and dryness is achieved.</p>
+<h4>●     <strong>Granola</strong></h4>
+<p>Granola and other similar products are typically made of oats and use a mixture of nuts, seeds, fruits, flavors, etc. These are cooked as a mixture alongside sweetener and oil to bind all the ingredients together. Once finished, these are crumbled to the desired size.</p>
+<h4>●     <strong>Hot Cereals</strong></h4>
+<p>Hot cereals are made by processing the grain, depending on what type it is. Oats are typically rolled or cut, wheat is cracked, while corn is milled into grits. These are then partially cooked, so as to shorten the time it takes the consumer to cook them in hot water or milk. Other ingredients, such as salt or sweeteners, may or may not be added, depending on the recipe.</p>
+<h4>●     <strong>Shaping and Coating System</strong></h4>
+<p>As most of us know, breakfast cereals come in a wide variety of shapes and sizes. These can be loops, letters of the alphabet, animal-shaped &#8211; you name it. To achieve these shapes, a die is fitted at the end of the extruder, allowing the ribbon of cooked dough to take the desired cross-section shape, which is then cut by the rotating knife at the desired size. These pieces are then processed in a similar way to puffing, but they only partially expand to maintain their special shape.</p>
+<p>After shaping, some cereals may be coated with sweeteners, vitamins, minerals, different flavors, preservatives, and food coloring. Frosting is applied in a rotating drum by spraying the cereal with a thick layer of sugar syrup. As the syrup dries, it turns into a white layer of frosting.</p>
+<h4>●     <strong>Conveying and Packaging</strong></h4>
+<p>While some types of cereal, such as shredded wheat and hot cereals, are fairly resistant to moisture damage and can be placed directly in cardboard boxes, most others need to be packed in waterproof and airtight plastic bags.</p>
+<p>Some typical film materials used in breakfast cereal packaging include:</p>
+<ul>
+<li>Biaxially-oriented polypropylene (BOPP)</li>
+<li>Low-density polyethylene (LDPE)</li>
+<li>Polyethylene terephthalate (PET)</li>
+<li>Metallised PET</li>
+<li>Aluminum foil</li>
+</ul>
+<p>These materials can be used in different combinations.</p>
+<p>As far as conveying goes, the breakfast cereal industry has traditionally used a variety of systems, including flat belts, buckets, and aeromechanical, pneumatic, or auger conveyors. However, these systems have been struggling to keep up with the industry&#8217;s demands, particularly in terms of cost-efficiency, integration, automation, and cross-contamination. Tubular drag conveyors, on the other hand, have proven themselves to provide the necessary flexibility and integration capability with all breakfast cereal types and processes. These conveying systems used in the food industry are ideal for moving the breakfast cereal product through the extrusion, forming, tempering, flaking, and toasting processes, then on through the coating and packaging processes.</p>
+<p><a href="https://cablevey.com/tube-conveyor-uses/food-conveyor-system/cereal-conveyor/" target="_blank" rel="noopener noreferrer">Cablevey&#8217;s Cereal Conveyor Systems</a> can move up to 1,500 cubic feet of product per hour in an enclosed tube without the use of air. It also comes available in a multitude of layouts and eliminates the risk of product separation, degradation, or cross-contamination.</p>
+					</div> <!-- .entry-content -->
+					<div class="et_post_meta_wrapper">
+										</div> <!-- .et_post_meta_wrapper -->
+				</article> <!-- .et_pb_post -->
+
+						</div> <!-- #left-area -->
+
+				<div id="sidebar">
+		<div id="categories-2" class="et_pb_widget widget_categories"><h4 class="widgettitle">Blog Categories</h4>
+			<ul>
+					<li class="cat-item cat-item-132"><a href="https://cablevey.com/category/nuts/almonds/" title="Tubular drag &amp; cable conveyors for almonds.">Almonds</a>
+</li>
+	<li class="cat-item cat-item-189"><a href="https://cablevey.com/category/biomass/">Biomass</a>
+</li>
+	<li class="cat-item cat-item-118"><a href="https://cablevey.com/category/breweries/" title="Enclosed tubular drag cable &amp; disc conveyors for barley, malted barley, and grains for beer breweries.">Breweries</a>
+</li>
+	<li class="cat-item cat-item-134"><a href="https://cablevey.com/category/cablevey-news/" title="Cablevey Conveyors News: Tubular drag &amp; cable conveyor technology.">Cablevey News</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://cablevey.com/category/processed-food/breakfast-cereals/" title="Tubular drag &amp; cable conveyors for breakfast cereals.">Cereals</a>
+</li>
+	<li class="cat-item cat-item-116"><a href="https://cablevey.com/category/processed-food/coffee/" title="Tubular drag &amp; cable conveyors for coffee.">Coffee</a>
+</li>
+	<li class="cat-item cat-item-184"><a href="https://cablevey.com/category/conveyors/conveyor-thoughts/">Conveyor Thoughts</a>
+</li>
+	<li class="cat-item cat-item-176"><a href="https://cablevey.com/category/conveyors/">Conveyors</a>
+</li>
+	<li class="cat-item cat-item-178"><a href="https://cablevey.com/category/breweries/craft-brewers-conference/">Craft Brewers Conference</a>
+</li>
+	<li class="cat-item cat-item-130"><a href="https://cablevey.com/category/feed/" title="Tubular drag &amp; cable conveyors for feed including Animal Feed, Aqua Feed and Pet Food.">Feed</a>
+</li>
+	<li class="cat-item cat-item-194"><a href="https://cablevey.com/category/food-safety/">Food Safety</a>
+</li>
+	<li class="cat-item cat-item-181"><a href="https://cablevey.com/category/conveyors/fragile-materials/">Fragile Materials</a>
+</li>
+	<li class="cat-item cat-item-183"><a href="https://cablevey.com/category/hemp/">Hemp</a>
+</li>
+	<li class="cat-item cat-item-40"><a href="https://cablevey.com/category/nuts/" title="Tubular drag &amp; cable conveyors for nuts including Peanuts, Walnuts, Tree Nuts, Cashews, Pine Nuts, Pecans and Almonds.">Nuts</a>
+</li>
+	<li class="cat-item cat-item-190"><a href="https://cablevey.com/category/packaging/">Packaging</a>
+</li>
+	<li class="cat-item cat-item-139"><a href="https://cablevey.com/category/nuts/pecans/">Pecans</a>
+</li>
+	<li class="cat-item cat-item-117"><a href="https://cablevey.com/category/feed/pet-food/" title="Tubular drag &amp; cable conveyors for pet food.">Pet Food</a>
+</li>
+	<li class="cat-item cat-item-152"><a href="https://cablevey.com/category/press/">Press</a>
+</li>
+	<li class="cat-item cat-item-127"><a href="https://cablevey.com/category/processed-food/" title="Processed food conveyors can handle a variety of food-grade materials. This includes different sizes, weights and combinations of materials. Typical food-grade conveyors move mixed and blended loads of materials. For example, in baking, a typical combination is flour, salt and yeast. Other common baking combinations are chocolate and sugar, grain and fat, and nuts and salt.">Processed Food</a>
+</li>
+	<li class="cat-item cat-item-191"><a href="https://cablevey.com/category/processing/">Processing</a>
+</li>
+	<li class="cat-item cat-item-157"><a href="https://cablevey.com/category/products/">Products</a>
+</li>
+	<li class="cat-item cat-item-125"><a href="https://cablevey.com/category/rice/" title="Tubular drag &amp; cable conveyors for rice.">Rice</a>
+</li>
+	<li class="cat-item cat-item-147"><a href="https://cablevey.com/category/nuts/seeds/">Seeds</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="https://cablevey.com/category/processed-food/snack-foods/" title="Tubular drag &amp; cable conveyors for snack foods.">Snack Foods</a>
+</li>
+	<li class="cat-item cat-item-151"><a href="https://cablevey.com/category/specialty-grain-handling/">Specialty Grain Handling</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="https://cablevey.com/category/tea/" title="Tubular drag &amp; cable conveyors for tea.">Tea</a>
+</li>
+	<li class="cat-item cat-item-192"><a href="https://cablevey.com/category/testimonials/">Testimonials</a>
+</li>
+	<li class="cat-item cat-item-159"><a href="https://cablevey.com/category/tips/">Tips</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://cablevey.com/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-140"><a href="https://cablevey.com/category/nuts/walnuts/">Walnuts</a>
+</li>
+			</ul>
+
+			</div> <!-- end .et_pb_widget -->	</div> <!-- end #sidebar -->
+		</div> <!-- #content-area -->
+	</div> <!-- .container -->
+	</div> <!-- #main-content -->
+
+
+	<span class="et_pb_scroll_top et-pb-icon"></span>
+
+
+			<footer id="main-footer">
+				
+<div class="container">
+    <div id="footer-widgets" class="clearfix">
+		<div class="footer-widget"><div id="text-13" class="fwidget et_pb_widget widget_text"><h4 class="title">About CABLEVEY®</h4>			<div class="textwidget"><p>CABLEVEY<sup>®</sup> is a world-wide tube conveyor manufacturer that designs, engineers, and services our tubular drag cable and disc conveyor systems in over 65 countries.</p>
+<p>Toll Free: <a href="tel:18002473344">1 (800) 247-3344</a> <br />
+T: <a href="tel:16416738451">+1 (641) 673-8451</a><br />
+F: +1 (641) 673-7419<br />
+E-mail: <a href="/cdn-cgi/l/email-protection#a6cfc8c0c9e6c5c7c4cac3d0c3df88c5c9cb"><span class="__cf_email__" data-cfemail="432a2d252c032022212f2635263a6d202c2e">[email&#160;protected]</span></a><br />
+2397 Highway 23<br />
+PO Box 148<br />
+Oskaloosa, Iowa<br />
+52577 USA</p>
+</div>
+		</div> <!-- end .fwidget --><div id="text-16" class="fwidget et_pb_widget widget_text"><h4 class="title">Cablevey Feeding Systems</h4>			<div class="textwidget"><p>Cablevey Ag delivers and installs products all over the world, our systems are made in the U.S.A., utilizing higher quality materials than many of our competitors.<br />
+Visit <a href="https://cableveyag.com">cableveyag.com</a></p>
+</div>
+		</div> <!-- end .fwidget --></div> <!-- end .footer-widget --><div class="footer-widget"><div id="search-2" class="fwidget et_pb_widget widget_search"><h4 class="title">Search</h4><form role="search" method="get" class="search-form" action="https://cablevey.com">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+		</label>
+        <input type="search" class="addsearch search-field" placeholder="Search …" value="" name="addsearch"></form></div> <!-- end .fwidget --><div id="nav_menu-2" class="fwidget et_pb_widget widget_nav_menu"><h4 class="title">Pages</h4><div class="menu-footer-widget-container"><ul id="menu-footer-widget" class="menu"><li id="menu-item-11240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11240"><a href="https://cablevey.com/about-us/">About us</a></li>
+<li id="menu-item-9957" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9957"><a href="https://blog.cablevey.com/blog">Blog</a></li>
+<li id="menu-item-5368" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5368"><a href="https://cablevey.com/submit-a-post/">Submit a Post</a></li>
+<li id="menu-item-5369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5369"><a href="https://cablevey.com/careers/">Careers</a></li>
+<li id="menu-item-10181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10181"><a href="https://cablevey.com/contact/">Contact Cablevey® Conveyors</a></li>
+<li id="menu-item-10397" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10397"><a href="https://cablevey.com/request-a-quote/">Request a quote</a></li>
+<li id="menu-item-6917" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6917"><a href="https://cablevey.com/cablevey-conveyors-manuals/">Manuals (password protected)</a></li>
+<li id="menu-item-5989" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5989"><a href="https://cablevey.com/brochures/">Brochures</a></li>
+<li id="menu-item-7171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7171"><a href="https://cablevey.com/cablevey-videos/">Cablevey Videos</a></li>
+</ul></div></div> <!-- end .fwidget --></div> <!-- end .footer-widget --><div class="footer-widget"><div id="icl_lang_sel_widget-1" class="fwidget et_pb_widget widget_icl_lang_sel_widget"><h4 class="title">Languages</h4>
+<div
+	 class="wpml-ls-sidebars-sidebar-4 wpml-ls wpml-ls-legacy-dropdown js-wpml-ls-legacy-dropdown" id="lang_sel">
+	<ul>
+
+		<li tabindex="0" class="wpml-ls-slot-sidebar-4 wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-first-item wpml-ls-last-item wpml-ls-item-legacy-dropdown">
+			<a href="#" class="js-wpml-ls-item-toggle wpml-ls-item-toggle lang_sel_sel icl-en">
+                <span class="wpml-ls-native icl_lang_sel_native">English</span></a>
+
+			<ul class="wpml-ls-sub-menu">
+							</ul>
+
+		</li>
+
+	</ul>
+</div>
+</div> <!-- end .fwidget -->
+		<div id="recent-posts-2" class="fwidget et_pb_widget widget_recent_entries">
+		<h4 class="title">Recent Posts</h4>
+		<ul>
+											<li>
+					<a href="https://cablevey.com/the-definitive-guide-to-microsoft-certifications/">The Definitive Guide to Microsoft Certifications</a>
+									</li>
+											<li>
+					<a href="https://cablevey.com/what-are-fragile-materials-in-food-processing/">What Are Fragile Materials In Food Processing?</a>
+									</li>
+											<li>
+					<a href="https://cablevey.com/fragile-materials-the-importance-of-safe-conveying-2/">Fragile Materials &#8211; The Importance of Safe Conveying</a>
+									</li>
+											<li>
+					<a href="https://cablevey.com/what-industries-can-tubular-drag-conveyors-be-used-in/">What Industries Can Tubular Drag Conveyors Be Used In?</a>
+									</li>
+											<li>
+					<a href="https://cablevey.com/how-tubular-drag-conveyors-compare-to-other-conveyor-types/">How Tubular Drag Conveyors Compare to Other Conveyor Types</a>
+									</li>
+					</ul>
+
+		</div> <!-- end .fwidget --></div> <!-- end .footer-widget --><div class="footer-widget"><div id="block-5" class="fwidget et_pb_widget widget_block"><p><div id='wufoo-kl3xk1o1dsnub9'>
+Fill out my <a href='http://cablevey.wufoo.com/forms/kl3xk1o1dsnub9'>online form</a>.
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="rocketlazyloadscript" data-rocket-type='text/javascript'>var kl3xk1o1dsnub9;(function(d, t) {
+var s = d.createElement(t), options = {
+'userName'      : 'cablevey',    
+'formHash'      : 'kl3xk1o1dsnub9',    
+'autoResize'    :  true,   
+'height'        : '459',      
+'async'         :  true,          
+'header'        : 'show',      
+'host'          : 'wufoo.com',    
+'entSource'     : 'wordpress',   
+'defaultValues' : ''     
+,'ssl'          :  true           };
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'secure.wufoo.com/scripts/embed/form.js';
+s.onload = s.onreadystatechange = function() {
+var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+try { kl3xk1o1dsnub9 = new WufooForm();kl3xk1o1dsnub9.initialize(options);kl3xk1o1dsnub9.display(); } catch (e) {}}
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script> <noscript> <iframe height="459" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none;"src="https://cablevey.wufoo.com/embed/kl3xk1o1dsnub9/def/entsource=wordpress"><a href="https://cablevey.wufoo.com/forms/kl3xk1o1dsnub9/def/entsource=wordpress" rel="nofollow">Fill out my Wufoo form!</a></iframe> </noscript></p>
+</div> <!-- end .fwidget --></div> <!-- end .footer-widget -->    </div> <!-- #footer-widgets -->
+</div>    <!-- .container -->
+
+		
+				<div id="footer-bottom">
+					<div class="container clearfix">
+				<ul class="et-social-icons">
+
+
+</ul><div id="footer-info">CABLEVEY® is a registered trademark of Intraco, Inc. 2021</div>					</div>	<!-- .container -->
+				</div>
+			</footer> <!-- #main-footer -->
+		</div> <!-- #et-main-area -->
+
+
+	</div> <!-- #page-container -->
+
+	
+<script type="rocketlazyloadscript">
+var cid = 7646; 
+(function() { 
+	window.a1WebStatsObj = 'a1w'; 
+ 	window.a1w = window.a1w || function(){ 
+		(window.a1w.q = window.ga.q || []).push(arguments) 
+	}, 
+	window.a1w.l = 1 * new Date(); 
+	var a = document.createElement('script'); 
+	var m = document.getElementsByTagName('script')[0]; 
+	a.async = 1; 
+	a.src = "https://api1.websuccess-data.com/tracker.js"; 
+	m.parentNode.insertBefore(a,m) 
+})()
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="//script.crazyegg.com/pages/scripts/0095/0150.js" async="async"></script>
+<script type="rocketlazyloadscript">
+
+    var cid = 7646;
+
+    (function() {
+
+               window.a1wObj = 'a1w';
+
+               window.a1w = window.a1w || function(){
+
+                        (window.a1w.q = window.ga.q || []).push(arguments)
+
+               },
+
+               window.a1w.l = 1 * new Date();
+
+               var a = document.createElement('script');
+
+               var m = document.getElementsByTagName('script')[0];
+
+               a.async = 1;
+
+               a.src = "https://api1.websuccess-data.com/tracker.js";
+
+               m.parentNode.insertBefore(a,m)
+
+        })()
+
+</script><!-- Start of LiveChat (www.livechatinc.com) code -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+  window.__lc = window.__lc || {};
+  window.__lc.license = 3167192;
+  window.__lc.chat_between_groups = false;
+  (function() {
+    var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+    lc.src = ('https:' == document.location.protocol ? 'https://' : 'https://') + 'cdn.livechatinc.com/tracking.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+  })();
+</script>
+<noscript>
+<a href="https://www.livechatinc.com/chat-with/3167192/" rel="nofollow">Chat with us</a>,
+powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
+</noscript>
+
+<script type="rocketlazyloadscript" async src="https://tag.simpli.fi/sifitag/32ca4400-cb5c-0138-3364-06abc14c0bc6"></script><!-- End of LiveChat code --><script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://addsearch.com/js/?key=aca19e1b7bd119902d09c653019de1b1' id='addsearch-settings-js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/devvn-image-hotspot/frontend/js/jquery.ihotspot.min.js?ver=1.2.1' id='ihotspot-js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/guest-author-name/assets/guest-author-post.js?ver=1.00' id='guest_author_post_scripts-js'></script>
+<script type='text/javascript' id='leadin-script-loader-js-js-extra'>
+/* <![CDATA[ */
+var leadin_wordpress = {"userRole":"visitor","pageType":"post","leadinPluginVersion":"8.4.90"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://js.hs-scripts.com/5282765.js?integration=WordPress' async defer id='hs-script-loader'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/popups-for-divi/scripts/front.min.js?ver=3.0.3' id='js-divi-area-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/industry-news\/|\/blog-posts\/|\/educational-guides\/|\/top-video-picks\/|\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/cablevey.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type='text/javascript' id='divi-custom-script-js-extra'>
+/* <![CDATA[ */
+var DIVI = {"item_count":"%d Item","items_count":"%d Items"};
+var et_shortcodes_strings = {"previous":"Previous","next":"Next"};
+var et_pb_custom = {"ajaxurl":"https:\/\/cablevey.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/cablevey.com\/wp-content\/themes\/Divi\/images","builder_images_uri":"https:\/\/cablevey.com\/wp-content\/themes\/Divi\/includes\/builder\/images","et_frontend_nonce":"23037cc84b","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"a4b70a88b7","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"1","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"12248","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"yes","is_shortcode_tracking":"","tinymce_uri":""}; var et_builder_utils_params = {"condition":{"diviTheme":true,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"}; var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_box_shadow_elements = [];
+var et_pb_motion_elements = {"desktop":[],"tablet":[],"phone":[]};
+var et_pb_sticky_elements = [];
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/themes/Divi/js/custom.unified.js?ver=4.9.11' id='divi-custom-script-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/easy-fancybox/js/jquery.fancybox.min.js?ver=1.3.24' id='jquery-fancybox-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='jquery-fancybox-js-after'>
+var fb_timeout, fb_opts={'overlayShow':true,'hideOnOverlayClick':true,'showCloseButton':true,'margin':20,'centerOnScroll':false,'enableEscapeButton':true,'autoScale':true };
+if(typeof easy_fancybox_handler==='undefined'){
+var easy_fancybox_handler=function(){
+jQuery('.nofancybox,a.wp-block-file__button,a.pin-it-button,a[href*="pinterest.com/pin/create"],a[href*="facebook.com/share"],a[href*="twitter.com/share"]').addClass('nolightbox');
+/* IMG */
+var fb_IMG_select='a[href*=".jpg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpg"]:not(.nolightbox),a[href*=".jpeg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpeg"]:not(.nolightbox),a[href*=".png"]:not(.nolightbox,li.nolightbox>a),area[href*=".png"]:not(.nolightbox),a[href*=".webp"]:not(.nolightbox,li.nolightbox>a),area[href*=".webp"]:not(.nolightbox)';
+jQuery(fb_IMG_select).addClass('fancybox image');
+var fb_IMG_sections=jQuery('.gallery,.wp-block-gallery,.tiled-gallery,.wp-block-jetpack-tiled-gallery');
+fb_IMG_sections.each(function(){jQuery(this).find(fb_IMG_select).attr('rel','gallery-'+fb_IMG_sections.index(this));});
+jQuery('a.fancybox,area.fancybox,li.fancybox a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'transitionIn':'elastic','easingIn':'easeOutBack','transitionOut':'elastic','easingOut':'easeInBack','opacity':false,'hideOnContentClick':false,'titleShow':true,'titlePosition':'over','titleFromAlt':true,'showNavArrows':true,'enableKeyboardNav':true,'cyclic':false}))});
+/* Inline */
+jQuery('a.fancybox-inline,area.fancybox-inline,li.fancybox-inline a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'type':'inline','autoDimensions':true,'scrolling':'no','easingIn':'easeOutBack','easingOut':'easeInBack','opacity':false,'hideOnContentClick':false,'titleShow':false}))});
+/* PDF */
+jQuery('a[href*=".pdf"],area[href*=".pdf"],a[href*=".PDF"],area[href*=".PDF"]').not('.nolightbox,li.nolightbox>a').addClass('fancybox-pdf');
+jQuery('a.fancybox-pdf,area.fancybox-pdf,li.fancybox-pdf a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'type':'iframe','width':'90%','height':'90%','padding':10,'titleShow':false,'titlePosition':'float','titleFromAlt':true,'autoDimensions':false,'scrolling':'no'}))});
+/* Vimeo */
+jQuery('a[href*="vimeo.com/"],area[href*="vimeo.com/"]').filter(function(){return this.href.match(/\/(?:[0-9]+|video\/)/);}).not('.nolightbox,li.nolightbox>a').addClass('fancybox-vimeo');
+jQuery('a.fancybox-vimeo,area.fancybox-vimeo,li.fancybox-vimeo a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'type':'iframe','width':500,'height':281,'keepRatio':1,'titleShow':false,'titlePosition':'float','titleFromAlt':true,'onStart':function(a,i,o){var splitOn=a[i].href.indexOf("?");var urlParms=(splitOn>-1)?a[i].href.substring(splitOn):"";o.allowfullscreen=(urlParms.indexOf("fullscreen=0")>-1)?false:true;o.href=a[i].href.replace(/https?:\/\/(?:www\.)?vimeo\.com\/([0-9]+)\??(.*)/gi,"https://player.vimeo.com/video/$1?$2&autoplay=1");}}))});
+/* iFrame */
+jQuery('a.fancybox-iframe,area.fancybox-iframe,li.fancybox-iframe a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'type':'iframe','width':'70%','height':'90%','titleShow':false,'titlePosition':'float','titleFromAlt':true,'allowfullscreen':false}))});};
+jQuery('a.fancybox-close').on('click',function(e){e.preventDefault();jQuery.fancybox.close()});
+};
+var easy_fancybox_auto=function(){setTimeout(function(){jQuery('#fancybox-auto').trigger('click')},1000);};
+jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_handler);
+jQuery(easy_fancybox_auto);
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/plugins/easy-fancybox/js/jquery.easing.min.js?ver=1.4.1' id='jquery-easing-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://cablevey.com/wp-content/themes/Divi/core/admin/js/common.js?ver=4.9.11' id='et-core-common-js'></script>
+<script type='text/javascript' src='https://cablevey.com/wp-includes/js/wp-embed.min.js?ver=5.8' id='wp-embed-js'></script>
+</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

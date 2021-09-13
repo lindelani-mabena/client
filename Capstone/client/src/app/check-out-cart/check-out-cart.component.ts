@@ -27,6 +27,7 @@ export class CheckOutCartComponent implements OnInit {
       this._router.navigate(['/login']);
 
     } */
+  
     this.stripePaymentGateway();
     this.calculateTotal();
   }

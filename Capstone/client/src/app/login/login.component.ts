@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('isLoggedIn',"true")
           localStorage.setItem('email', this.userLogin.username);
           localStorage.setItem('userID',  this.userLogin._id);
-          this._Router.navigate(['/products']);
+          this._Router.navigate(['/home']);
         }        
       }
       else{

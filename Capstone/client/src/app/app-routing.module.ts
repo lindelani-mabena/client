@@ -28,6 +28,7 @@ const routes: Routes = [
   {path:'update-profile', component:UpdateProfileComponent},
   {path:'contact', component:ContactComponent},
   {path:'products', component:ProductsComponent},
+  {path:'products/:category', component:ProductsComponent},
   {path:'product-info/:id', component:ProductMoreInfoComponent},
   {path:'cart', component:CartComponent},
   {path:'checkout', component:CheckOutCartComponent},

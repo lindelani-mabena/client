@@ -2,7 +2,7 @@
     <div *ngFor="let productItem of listProducts">
         <div class="col">
             <div class="card shadow-sm">
-                <img src="{{productItem.imageUrl}}" alt="" width="100%" height="200" />
+                <img src={{productItem.imageUrl}} alt="" width="100%" height="200" />
                 <div class="card-body">
                     <table class="table">
                         <tbody>
@@ -12,7 +12,7 @@
                             </tr>
                             <tr>
                                 <td>Product Price</td>
-                                <td>{{productItem.price}}</td>
+                                <td>R{{productItem.price}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -23,7 +23,7 @@
                                 Details</a>
                             <button type="button" (click)="buyThisProduct(productItem)" class="btn btn-sm btn-outline-secondary">Add to cart</button>
                         </div>
-                        <small class="text-muted">{{productItem.quantity}} items are left.</small>
+                        <small class="text-muted">{{ productItem.quantity }} items are left.</small>
                     </div>
                 </div>
             </div>

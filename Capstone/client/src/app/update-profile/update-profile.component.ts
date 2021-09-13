@@ -17,6 +17,7 @@ export class UpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.id= localStorage.getItem("userID");
+    alert("User Id is "+ this.id);
     
   }
 

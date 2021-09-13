@@ -28,10 +28,17 @@
          />
         <label for="quantity">Product Quantity</label>
       </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="category" name="category" [(ngModel)]= "product.category" placeholder="Product Category"/>
-        <label for="category">Product Category</label>
-      </div>
+      <div class="mb-3">
+        <select class="form-select" name="category" id="category"  [(ngModel)]= "product.category">
+            <option [ngValue]="undefined" selected>Choose Category</option>
+            <option value="dairy">Dairy Products</option>
+            <option value="processed-meats">Processed Meats</option>
+            <option value="drinks">Drinks</option>
+            <option value="fruits-vegetables">Fruits and Vegetables</option>
+            <option value="vegetables">Cereals</option>
+            <option value="snacks">Snacks</option>
+        </select>
+    </div>
       <br />
       <a href="#" class="w-100 btn btn-lg btn-secondary"  type="submit" (click)="addProduct()">Add New Product</a>
     </form>

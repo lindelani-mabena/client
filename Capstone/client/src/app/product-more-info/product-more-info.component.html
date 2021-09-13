@@ -1,7 +1,7 @@
 <div class="row align-items-md-stretch">
     <div class="col-md-5">
         <div class="h-100 p-3 text-whiterounded-3">
-            <img src='{{selectedProduct.imageUrl}}' width="100%" height="300" />
+           <img src={{selectedProduct.imageUrl}} alt="" width="100%" height="200" /> 
         </div>
     </div>
     <div class="col-md-7">
@@ -13,7 +13,7 @@
                         <tbody>
                             <tr>
                                 <td>Product Id</td>
-                             <td>{{selectedProduct._id}}</td>
+                                <td>{{selectedProduct._id}}</td>
                             </tr>
                             <tr>
                                 <td>Product Name</td>
@@ -33,7 +33,7 @@
                 <div class="card-footer">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a routerLink='/products' class="btn btn-sm btn-outline-secondary">Explore More Products</a>
+                            <a routerLink='/home' class="btn btn-sm btn-outline-secondary">Explore More Products</a>
                             <button type="button" (click)="buyThisProduct(selectedProduct)"class="btn btn-sm btn-outline-secondary">Add to cart</button>
                         </div>
                     </div>

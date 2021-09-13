@@ -14,10 +14,8 @@ export class InvoiceComponent implements OnInit {
   totalAmount: number =0;
   receiverEmailAddress ="";
  
-  constructor(private _CartService: CartService) { 
-    
+  constructor(private _CartService: CartService) {  
   }
-
   ngOnInit(): void {
     this.productItems= this._CartService.retrieveCartItemsFromLocalStorage();
     this.calculateTotal();

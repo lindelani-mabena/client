@@ -19,35 +19,24 @@ export class ProductMoreInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.id= this._route.snapshot.paramMap.get('id');
-    console.log("Id is" + this.id);
+   // alert("Id is" + this.id);
+
     this._HttpConnectionService.getProductById(this.id).subscribe((result)=>
     {
-      console.log("result is "+ result)
+      //console.log("result is "+ result.name);
       this.selectedProduct = result;
-      console.log("selected "+this.selectedProduct._id);
     },(error)=>
     {
       console.log("error is " + error);
     });
   }
-
-
-  buyThisProduct(selectedProduct)
+  buyThisProduct(productItem:Product)
   {
-
     this.cartItems = this._CartService.retrieveCartItemsFromLocalStorage();
-    for (var i=0; i< this.cartItems.length;i++)
-    {
-      if(selectedProduct._id ==this.cartItems[i]._id)
-      {
-        alert("product is already in cart");
-        return;
-      }
-    }
-
-    this._CartService.addItemToCart(selectedProduct);
-    alert(selectedProduct.name +" item added to the cart");
+    this._CartService.addItemToCart(productItem);
+    alert(productItem.name +" item added to the cart");
     this._Router.navigate(['/cart']);
+
   }
 
 }

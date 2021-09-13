@@ -6,27 +6,15 @@
             <li class="nav-item"><a routerLink="about" class="btn nav-link link-dark px-2">About</a></li>
             <li class="nav-item"><a routerLink="books" class="btn nav-link link-dark px-2">View Categories</a></li>
             <li class="nav-item"><a routerLink="contact" class="btn nav-link link-dark px-2">Contact</a></li>
-            <li class="nav-item"><a routerLink="add-book" class="btn nav-link link-dark px-2">Manage Products</a></li> <!-- *ngIf="adminLoggedIn" -->
-            <!--<li class="nav-item"><a routerLink="update-book" *ngIf="adminLoggedIn"
-                    class="btn nav-link link-dark px-2">Update book</a></li> -->
+            <li class="nav-item"><a routerLink="add-book" class="btn nav-link link-dark px-2">Manage Products</a></li>
         </ul>
         <ul class="nav">
-            <!--  <li class="nav-item" *ngIf="loggedIn!=true"><a routerLink="login" class="btn nav-link link-dark px-2"
-            (click)="btnLoginLink()">Login</a></li>
-        <li class="nav-item" *ngIf="loggedIn!=true"><a routerLink="sign-up" class="btn nav-link link-dark px-2"
-            (click)="btnSignUpLink()">Sign up</a></li>
-        <li class="nav-item" *ngIf="loggedIn==true"><a routerLink="login" class="btn nav-link link-dark px-2"
-            (click)="btnLogoutLink()">Logout</a></li> -->
             <li class="nav-item"><a routerLink="sign-in" class="btn nav-link link-dark px-2">Login</a>
-                <!--*ngIf="!loggedIn"-->
             </li>
             <li class="nav-item"><a routerLink="register" class="btn nav-link link-dark px-2">Register</a></li>
-            <!--*ngIf="!loggedIn"-->
             <li class="nav-item"><a routerLink="update-profile" class="btn nav-link link-dark px-2">Update profile</a>
             </li>
-            <!--*ngIf="!loggedIn"-->
             <li class="nav-item"><a href="#" class="btn nav-link link-dark px-2">Logout</a></li>
-            <!--*ngIf="loggedIn"-->
         </ul>
     </div>
 </nav>
@@ -99,7 +87,4 @@
         </div>
     </div>
 </footer>
-
-
-
 <router-outlet></router-outlet>

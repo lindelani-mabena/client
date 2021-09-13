@@ -25,5 +25,4 @@ export class ContactComponent implements OnInit {
         console.log("The error is "+ error)
       }) 
   }
-
 }

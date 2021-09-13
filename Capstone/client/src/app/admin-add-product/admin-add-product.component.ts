@@ -29,4 +29,10 @@ export class AdminAddProductComponent implements OnInit {
     })
   }
 
+  handleChange(event: Event) {
+    //alert((event.target as HTMLInputElement).value);
+    this.product.category = (event.target as HTMLInputElement).value;
+    return (event.target as HTMLInputElement).value;
+  }
+
 }

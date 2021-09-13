@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpConnectionService } from '../http-connection.service';
 import { Product } from '../models/product';
 import { CartService } from '../services/cart.service';
@@ -10,14 +10,18 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
   listProducts: Array<Product> = [];
   cartItems:Array<Product> =[];
-  constructor(private _HttpConnectionService: HttpConnectionService, private _CartService:CartService, private _Router:Router) { 
+  categorySelected: string;
+
+  constructor(private _HttpConnectionService: HttpConnectionService, private _CartService:CartService, private _Router:Router, private _ActivatedRoute: ActivatedRoute) { 
 
   }
   ngOnInit(): void {
-    this._HttpConnectionService.getProducts().subscribe((result)=>{
+    this.categorySelected =this._ActivatedRoute.snapshot.paramMap.get('category');
+    alert("category is"+ this.categorySelected);
+    //getProductsByCategory(this.categorySelected)
+    this._HttpConnectionService.getProductsByCategory(this.categorySelected).subscribe((result)=>{
       this.listProducts = result;
       console.log("list is"+ this.listProducts);
     },(error)=>
